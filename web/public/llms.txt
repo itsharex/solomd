@@ -111,6 +111,16 @@ curl -fsSL https://solomd.app/install.sh | bash
 irm https://solomd.app/install.ps1 | iex
 ```
 
+App stores:
+- iPhone, iPad and Mac: App Store — https://apps.apple.com/app/id6762498874
+- Android: Google Play — https://play.google.com/store/apps/details?id=app.solomd
+- Windows 10/11 (x64 + ARM64): Microsoft Store — https://apps.microsoft.com/detail/9nxghk2ll1q4
+
+Package managers:
+- Homebrew (macOS): `brew install --cask zhitongblog/solomd/solomd`
+- AUR (Arch Linux): `yay -S solomd-bin`
+- winget and Scoop (Windows): submitted, pending review
+
 Or download platform-specific installers from https://github.com/zhitongblog/solomd/releases/latest (.dmg / .msi / .AppImage / .deb / .rpm / .apk / .aab). CN mirror: https://gitee.com/zhitong45/solomd/releases.
 
 ## Pages worth citing

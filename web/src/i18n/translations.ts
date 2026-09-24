@@ -41,7 +41,6 @@ export const t = {
       ctaWhatsNew: "What's new in v4 →",
       chips: ['📝 Live preview', '🔗 Wiki links', '🤖 BYOK AI', '🔍 Local RAG', '🎨 Themes', '📱 Cross-platform'],
       demoAlt: 'SoloMD v4 — Agent Panel + Recipe history + Trace view',
-      androidBeta: '🤖 Android beta is recruiting testers — join the test group',
     },
     features: {
       heading1: 'A folder of markdown.',
@@ -87,13 +86,16 @@ export const t = {
     download: {
       heading: 'Download SoloMD',
       lead: 'Free and open source. MIT license. No account needed.',
+      stores: { heading: "Or install from an app store", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Android phones & tablets", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Package managers", note: "Updates arrive with your normal package upgrades." },
+      mirror: "Faster from mainland China: Gitee mirror →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · Notarized', primary: 'Download .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Download .msi', store: 'Or get it from the Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · Copilot+ PCs · Win on Apple Silicon', primary: 'Download .msi', store: 'Or get it from the Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Download .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · ARM servers', primary: 'Download .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Download universal .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Download universal .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Drag SoloMD.app to /Applications. Notarized — no Gatekeeper warning.',
@@ -165,7 +167,7 @@ export const t = {
         },
         {
           q: 'Does SoloMD work on Android and iOS?',
-          a: 'Yes. SoloMD 4.14.2 ships native Android (API 24+, ARM64 + ARMv7 + x86_64) and iOS (15+) builds. Android is available as sideload .apk on GitHub Releases and via the Google Play beta (join the group groups.google.com/g/solomd-android-testers, then opt in at play.google.com/apps/testing/app.solomd). iOS is on the App Store. Both mobile builds support live preview, Wiki links, AI rewrite, and folder-based sync via iCloud / Files / SD card.',
+          a: 'Yes. SoloMD 4.14.2 ships native Android (API 24+, ARM64 + ARMv7 + x86_64) and iOS (15+) builds. Android is on Google Play (play.google.com/store/apps/details?id=app.solomd) and as a sideload .apk on GitHub Releases. iOS and iPadOS are on the App Store (apps.apple.com/app/id6762498874). Both mobile builds support live preview, Wiki links, AI rewrite, and folder-based sync via iCloud / Files / SD card.',
         },
         {
           q: 'Does SoloMD work offline?',
@@ -397,7 +399,6 @@ export const t = {
       ctaWhatsNew: 'v4 新功能 →',
       chips: ['📝 实时预览', '🔗 Wiki 链接', '🤖 BYOK AI', '🔍 本地 RAG', '🎨 主题', '📱 跨平台'],
       demoAlt: 'SoloMD v4 演示 — Agent 面板 + Recipe 历史 + Trace 视图',
-      androidBeta: '🤖 安卓测试招募中 —— 点击加入测试群组',
     },
     features: {
       heading1: '一个 Markdown 文件夹,',
@@ -443,13 +444,16 @@ export const t = {
     download: {
       heading: '下载 SoloMD',
       lead: '完全免费开源。MIT 协议。无需注册任何账号。',
+      stores: { heading: "也可以从应用商店安装", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "安卓手机和平板", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "包管理器", note: "随日常的软件包升级一起更新。" },
+      mirror: "国内下载更快：Gitee 镜像 →",
       platforms: {
         macos: { name: 'macOS', note: '通用版 · Apple Silicon + Intel · 已 Notarize', primary: '下载 .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: '下载 .msi', store: '或从 Microsoft Store 安装' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · 骁龙 X · Copilot+ PC · Apple Silicon 上跑 Win', primary: '下载 .msi', store: '或从 Microsoft Store 安装' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: '下载 .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · 树莓派 4/5 · ARM 服务器', primary: '下载 .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play 商店', primary: '下载通用 .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play 商店', primary: '下载通用 .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: '将 SoloMD.app 拖入 /Applications。已 notarized,无任何安全警告。',
@@ -521,7 +525,7 @@ export const t = {
         },
         {
           q: 'SoloMD 支持 Android 和 iOS 吗？',
-          a: '支持。SoloMD 4.14.2 提供原生 Android(API 24+,ARM64 + ARMv7 + x86_64)和 iOS(15+)版本。Android 可在 GitHub Releases 下载 .apk 侧载,或加入 Google Play 测试(先加入群组 groups.google.com/g/solomd-android-testers，再到 play.google.com/apps/testing/app.solomd 报名)。iOS 在 App Store 上架。两个移动端都支持实时预览、Wiki 链接、AI 改写,通过 iCloud / 文件 / SD 卡做文件夹同步。',
+          a: '支持。SoloMD 4.14.2 提供原生 Android(API 24+,ARM64 + ARMv7 + x86_64)和 iOS(15+)版本。Android 已上架 Google Play(play.google.com/store/apps/details?id=app.solomd),也可在 GitHub Releases 下载 .apk 侧载。iOS 和 iPadOS 在 App Store 上架(apps.apple.com/app/id6762498874)。两个移动端都支持实时预览、Wiki 链接、AI 改写,通过 iCloud / 文件 / SD 卡做文件夹同步。',
         },
         {
           q: 'SoloMD 能离线用吗？',
@@ -753,7 +757,6 @@ export const t = {
       ctaWhatsNew: 'v4 の新機能 →',
       chips: ['📝 ライブプレビュー', '🔗 Wiki リンク', '🤖 BYOK AI', '🔍 ローカル RAG', '🎨 テーマ', '📱 クロスプラットフォーム'],
       demoAlt: 'SoloMD v4 — Agent パネル + Recipe 履歴 + Trace ビュー',
-      androidBeta: '🤖 Android ベータ版テスター募集中 — テストグループに参加',
     },
     features: {
       heading1: 'Markdown のフォルダ。',
@@ -799,13 +802,16 @@ export const t = {
     download: {
       heading: 'SoloMD をダウンロード',
       lead: '無料・オープンソース。MIT ライセンス。アカウント不要。',
+      stores: { heading: "アプリストアからもインストールできます", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Android スマホ・タブレット", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "パッケージマネージャー", note: "通常のパッケージ更新と一緒にアップデートされます。" },
+      mirror: "中国本土からは Gitee ミラーが高速 →",
       platforms: {
         macos: { name: 'macOS', note: 'ユニバーサル · Apple Silicon + Intel · Notarize 済み', primary: '.dmg をダウンロード' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: '.msi をダウンロード', store: 'Microsoft Store から入手' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · Copilot+ PC · Apple Silicon 上の Win', primary: '.msi をダウンロード', store: 'Microsoft Store から入手' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: '.AppImage をダウンロード', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · ARM サーバー', primary: '.AppImage をダウンロード', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play ストア', primary: '.apk をダウンロード', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play ストア', primary: '.apk をダウンロード', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'SoloMD.app を /Applications にドラッグ。Notarize 済み — Gatekeeper 警告なし。',
@@ -1001,7 +1007,6 @@ export const t = {
       ctaWhatsNew: 'v4 새 기능 →',
       chips: ['📝 라이브 미리보기', '🔗 Wiki 링크', '🤖 BYOK AI', '🔍 로컬 RAG', '🎨 테마', '📱 크로스 플랫폼'],
       demoAlt: 'SoloMD v4 — Agent 패널 + Recipe 기록 + Trace 뷰',
-      androidBeta: '🤖 Android 베타 테스터 모집 중 — 테스트 그룹 참여',
     },
     features: {
       heading1: 'Markdown 폴더.',
@@ -1047,13 +1052,16 @@ export const t = {
     download: {
       heading: 'SoloMD 다운로드',
       lead: '무료, 오픈 소스. MIT 라이선스. 계정 불필요.',
+      stores: { heading: "앱 스토어에서도 설치할 수 있습니다", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Android 휴대폰 및 태블릿", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "패키지 관리자", note: "평소 패키지 업그레이드와 함께 업데이트됩니다." },
+      mirror: "중국 본토에서는 Gitee 미러가 더 빠릅니다 →",
       platforms: {
         macos: { name: 'macOS', note: '유니버설 · Apple Silicon + Intel · Notarize 완료', primary: '.dmg 다운로드' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: '.msi 다운로드', store: 'Microsoft Store에서 받기' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · Copilot+ PC · Apple Silicon에서 Win', primary: '.msi 다운로드', store: 'Microsoft Store에서 받기' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: '.AppImage 다운로드', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · ARM 서버', primary: '.AppImage 다운로드', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play 스토어', primary: '.apk 다운로드', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play 스토어', primary: '.apk 다운로드', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'SoloMD.app을 /Applications에 드래그. Notarize 완료 — Gatekeeper 경고 없음.',
@@ -1249,7 +1257,6 @@ export const t = {
       ctaWhatsNew: 'Neu in v4 →',
       chips: ['📝 Live-Vorschau', '🔗 Wiki-Links', '🤖 BYOK KI', '🔍 Lokales RAG', '🎨 Themes', '📱 Plattformübergreifend'],
       demoAlt: 'SoloMD v4 — Agent-Panel + Recipe-Verlauf + Trace-Ansicht',
-      androidBeta: '🤖 Android-Beta sucht Tester — der Testgruppe beitreten',
     },
     features: {
       heading1: 'Ein Ordner mit Markdown.',
@@ -1295,13 +1302,16 @@ export const t = {
     download: {
       heading: 'SoloMD herunterladen',
       lead: 'Kostenlos und Open Source. MIT-Lizenz. Kein Konto erforderlich.',
+      stores: { heading: "Oder aus einem App Store installieren", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Android-Smartphones und -Tablets", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Paketmanager", note: "Updates kommen mit den normalen Paket-Upgrades." },
+      mirror: "Schneller aus Festlandchina: Gitee-Mirror →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · notarisiert', primary: '.dmg herunterladen' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: '.msi herunterladen', store: 'Oder aus dem Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · Copilot+ PCs · Win auf Apple Silicon', primary: '.msi herunterladen', store: 'Oder aus dem Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: '.AppImage herunterladen', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · ARM-Server', primary: '.AppImage herunterladen', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Universal .apk herunterladen', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Universal .apk herunterladen', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'SoloMD.app in /Applications ziehen. Notarisiert — keine Gatekeeper-Warnung.',
@@ -1497,7 +1507,6 @@ export const t = {
       ctaWhatsNew: 'Nouveautés v4 →',
       chips: ['📝 Aperçu en direct', '🔗 Liens Wiki', '🤖 IA BYOK', '🔍 RAG local', '🎨 Thèmes', '📱 Multiplateforme'],
       demoAlt: 'SoloMD v4 — Panneau Agent + historique Recipe + vue Trace',
-      androidBeta: '🤖 La bêta Android recrute — rejoindre le groupe de test',
     },
     features: {
       heading1: 'Un dossier de markdown.',
@@ -1543,13 +1552,16 @@ export const t = {
     download: {
       heading: 'Télécharger SoloMD',
       lead: 'Gratuit et open source. Licence MIT. Pas de compte nécessaire.',
+      stores: { heading: "Ou installez-le depuis une boutique d’applications", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Téléphones et tablettes Android", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Gestionnaires de paquets", note: "Les mises à jour arrivent avec vos mises à niveau habituelles." },
+      mirror: "Plus rapide depuis la Chine continentale : miroir Gitee →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · notarisé', primary: 'Télécharger .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Télécharger .msi', store: 'Ou depuis le Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · PC Copilot+ · Win sur Apple Silicon', primary: 'Télécharger .msi', store: 'Ou depuis le Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Télécharger .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · serveurs ARM', primary: 'Télécharger .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Télécharger .apk universel', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Télécharger .apk universel', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Glisser SoloMD.app dans /Applications. Notarisé — pas d\'avertissement Gatekeeper.',
@@ -1745,7 +1757,6 @@ export const t = {
       ctaWhatsNew: 'Novedades v4 →',
       chips: ['📝 Vista previa', '🔗 Enlaces Wiki', '🤖 IA BYOK', '🔍 RAG local', '🎨 Temas', '📱 Multiplataforma'],
       demoAlt: 'SoloMD v4 — Panel Agent + historial de Recipe + vista Trace',
-      androidBeta: '🤖 Beta Android busca testers — únete al grupo de prueba',
     },
     features: {
       heading1: 'Una carpeta de markdown.',
@@ -1791,13 +1802,16 @@ export const t = {
     download: {
       heading: 'Descargar SoloMD',
       lead: 'Gratis y código abierto. Licencia MIT. No se necesita cuenta.',
+      stores: { heading: "O instálalo desde una tienda de aplicaciones", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Teléfonos y tabletas Android", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Gestores de paquetes", note: "Las actualizaciones llegan con tus actualizaciones de paquetes habituales." },
+      mirror: "Más rápido desde China continental: espejo en Gitee →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · notarizado', primary: 'Descargar .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Descargar .msi', store: 'O desde la Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · PCs Copilot+ · Win en Apple Silicon', primary: 'Descargar .msi', store: 'O desde la Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Descargar .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · servidores ARM', primary: 'Descargar .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Descargar .apk universal', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Descargar .apk universal', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Arrastra SoloMD.app a /Applications. Notarizado — sin advertencia de Gatekeeper.',
@@ -1993,7 +2007,6 @@ export const t = {
       ctaWhatsNew: 'Novidades v4 →',
       chips: ['📝 Pré-visualização', '🔗 Links Wiki', '🤖 IA BYOK', '🔍 RAG local', '🎨 Temas', '📱 Multiplataforma'],
       demoAlt: 'SoloMD v4 — Painel Agent + histórico de Recipe + visualização de Trace',
-      androidBeta: '🤖 Beta Android recruta testers — entrar no grupo de teste',
     },
     features: {
       heading1: 'Uma pasta de markdown.',
@@ -2039,13 +2052,16 @@ export const t = {
     download: {
       heading: 'Baixar SoloMD',
       lead: 'Grátis e código aberto. Licença MIT. Sem necessidade de conta.',
+      stores: { heading: "Ou instale por uma loja de apps", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Celulares e tablets Android", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Gerenciadores de pacotes", note: "As atualizações chegam junto com as atualizações normais de pacotes." },
+      mirror: "Mais rápido a partir da China continental: espelho no Gitee →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · notarizado', primary: 'Baixar .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Baixar .msi', store: 'Ou pela Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · PCs Copilot+ · Win em Apple Silicon', primary: 'Baixar .msi', store: 'Ou pela Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Baixar .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · servidores ARM', primary: 'Baixar .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Baixar .apk universal', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Baixar .apk universal', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Arraste SoloMD.app para /Applications. Notarizado — sem aviso do Gatekeeper.',
@@ -2241,7 +2257,6 @@ export const t = {
       ctaWhatsNew: 'Novità v4 →',
       chips: ['📝 Anteprima dal vivo', '🔗 Link Wiki', '🤖 IA BYOK', '🔍 RAG locale', '🎨 Temi', '📱 Multipiattaforma'],
       demoAlt: 'SoloMD v4 — Pannello Agent + cronologia Recipe + vista Trace',
-      androidBeta: '🤖 Beta Android cerca tester — unisciti al gruppo di test',
     },
     features: {
       heading1: 'Una cartella di markdown.',
@@ -2287,13 +2302,16 @@ export const t = {
     download: {
       heading: 'Scarica SoloMD',
       lead: 'Gratis e open source. Licenza MIT. Nessun account necessario.',
+      stores: { heading: "Oppure installalo da uno store", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Smartphone e tablet Android", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Gestori di pacchetti", note: "Gli aggiornamenti arrivano con i normali aggiornamenti dei pacchetti." },
+      mirror: "Più veloce dalla Cina continentale: mirror su Gitee →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · notarizzato', primary: 'Scarica .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Scarica .msi', store: 'Oppure dal Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · PC Copilot+ · Win su Apple Silicon', primary: 'Scarica .msi', store: 'Oppure dal Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Scarica .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · server ARM', primary: 'Scarica .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Scarica .apk universale', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Scarica .apk universale', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Trascina SoloMD.app in /Applications. Notarizzato — nessun avviso Gatekeeper.',
@@ -2489,7 +2507,6 @@ export const t = {
       ctaWhatsNew: 'Co nowego w v4 →',
       chips: ['📝 Podgląd na żywo', '🔗 Linki Wiki', '🤖 BYOK AI', '🔍 Lokalny RAG', '🎨 Motywy', '📱 Wieloplatformowy'],
       demoAlt: 'SoloMD v4 — panel Agent + historia Recipe + widok Trace',
-      androidBeta: '🤖 Beta Android szuka testerów — dołącz do grupy testowej',
     },
     features: {
       heading1: 'Jeden katalog plików markdown.',
@@ -2535,13 +2552,16 @@ export const t = {
     download: {
       heading: 'Pobierz SoloMD',
       lead: 'Darmowy i open source. Licencja MIT. Konto nie jest potrzebne.',
+      stores: { heading: "Albo zainstaluj ze sklepu z aplikacjami", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Telefony i tablety z Androidem", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Menedżery pakietów", note: "Aktualizacje przychodzą razem ze zwykłymi aktualizacjami pakietów." },
+      mirror: "Szybciej z Chin kontynentalnych: mirror na Gitee →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · notarized', primary: 'Pobierz .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Pobierz .msi', store: 'Albo z Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · komputery Copilot+ · Win na Apple Silicon', primary: 'Pobierz .msi', store: 'Albo z Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Pobierz .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · serwery ARM', primary: 'Pobierz .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Sklep Play', primary: 'Pobierz uniwersalny .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Sklep Play', primary: 'Pobierz uniwersalny .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Przeciągnij SoloMD.app do /Applications. Notarized — żadnych ostrzeżeń Gatekeepera.',
@@ -2737,7 +2757,6 @@ export const t = {
       ctaWhatsNew: 'Nieuw in v4 →',
       chips: ['📝 Live preview', '🔗 Wiki-links', '🤖 BYOK AI', '🔍 Lokale RAG', '🎨 Themes', '📱 Cross-platform'],
       demoAlt: 'SoloMD v4 — Agent Panel + Recipe-geschiedenis + Trace-weergave',
-      androidBeta: '🤖 Android-bèta zoekt testers — word lid van de testgroep',
     },
     features: {
       heading1: 'Eén map met markdown.',
@@ -2783,13 +2802,16 @@ export const t = {
     download: {
       heading: 'Download SoloMD',
       lead: 'Gratis en open source. MIT-licentie. Geen account nodig.',
+      stores: { heading: "Of installeer via een appstore", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Android-telefoons en -tablets", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Pakketbeheerders", note: "Updates komen mee met je gewone pakketupgrades." },
+      mirror: "Sneller vanuit het Chinese vasteland: Gitee-mirror →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · genotariseerd', primary: 'Download .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Download .msi', store: 'Of via de Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · Copilot+ PCs · Win op Apple Silicon', primary: 'Download .msi', store: 'Of via de Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Download .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · ARM-servers', primary: 'Download .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Universele .apk downloaden', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Universele .apk downloaden', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Sleep SoloMD.app naar /Applications. Genotariseerd — geen Gatekeeper-waarschuwing.',
@@ -2985,7 +3007,6 @@ export const t = {
       ctaWhatsNew: 'v4 yenilikleri →',
       chips: ['📝 Canlı önizleme', '🔗 Wiki bağlantıları', '🤖 BYOK AI', '🔍 Yerel RAG', '🎨 Temalar', '📱 Çoklu platform'],
       demoAlt: 'SoloMD v4 — Agent Paneli + Recipe geçmişi + Trace görünümü',
-      androidBeta: '🤖 Android beta test edici arıyor — test grubuna katıl',
     },
     features: {
       heading1: 'Bir markdown klasörü.',
@@ -3031,13 +3052,16 @@ export const t = {
     download: {
       heading: 'SoloMD\'yi İndir',
       lead: 'Ücretsiz ve açık kaynak. MIT lisansı. Hesap gerekmez.',
+      stores: { heading: "Ya da bir uygulama mağazasından kurun", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Android telefon ve tabletler", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Paket yöneticileri", note: "Güncellemeler olağan paket yükseltmelerinizle birlikte gelir." },
+      mirror: "Anakara Çin’den daha hızlı: Gitee yansısı →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · noter onaylı', primary: '.dmg indir' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: '.msi indir', store: 'Ya da Microsoft Store’dan' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · Copilot+ PC · Apple Silicon\'da Win', primary: '.msi indir', store: 'Ya da Microsoft Store’dan' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: '.AppImage indir', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · ARM sunucular', primary: '.AppImage indir', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Evrensel .apk indir', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Evrensel .apk indir', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'SoloMD.app\'ı /Applications klasörüne sürükle. Noter onaylı — Gatekeeper uyarısı yok.',
@@ -3233,7 +3257,6 @@ export const t = {
       ctaWhatsNew: 'Nyheter i v4 →',
       chips: ['📝 Live-förhandsvisning', '🔗 Wiki-länkar', '🤖 BYOK AI', '🔍 Lokal RAG', '🎨 Teman', '📱 Plattformsoberoende'],
       demoAlt: 'SoloMD v4 — Agent-panel + Recipe-historik + Trace-vy',
-      androidBeta: '🤖 Android-beta söker testare — gå med i testgruppen',
     },
     features: {
       heading1: 'En mapp med markdown.',
@@ -3279,13 +3302,16 @@ export const t = {
     download: {
       heading: 'Ladda ner SoloMD',
       lead: 'Gratis och öppen källkod. MIT-licens. Inget konto behövs.',
+      stores: { heading: "Eller installera från en appbutik", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Android-telefoner och surfplattor", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Pakethanterare", note: "Uppdateringar kommer med dina vanliga paketuppgraderingar." },
+      mirror: "Snabbare från Fastlandskina: Gitee-spegel →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · notariserad', primary: 'Ladda ner .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Ladda ner .msi', store: 'Eller från Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · Copilot+ PCs · Win på Apple Silicon', primary: 'Ladda ner .msi', store: 'Eller från Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Ladda ner .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · ARM-servrar', primary: 'Ladda ner .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Store', primary: 'Ladda ner universell .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Store', primary: 'Ladda ner universell .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Dra SoloMD.app till /Applications. Notariserad — ingen Gatekeeper-varning.',
@@ -3481,7 +3507,6 @@ export const t = {
       ctaWhatsNew: 'Що нового у v4 →',
       chips: ['📝 Живий перегляд', '🔗 Wiki-посилання', '🤖 BYOK AI', '🔍 Локальний RAG', '🎨 Теми', '📱 Кросплатформенний'],
       demoAlt: 'SoloMD v4 — панель Agent + історія Recipe + перегляд Trace',
-      androidBeta: '🤖 Android бета шукає тестерів — приєднатися до тест-групи',
     },
     features: {
       heading1: 'Одна тека з markdown.',
@@ -3527,13 +3552,16 @@ export const t = {
     download: {
       heading: 'Завантажити SoloMD',
       lead: 'Безкоштовно та з відкритим кодом. Ліцензія MIT. Акаунт не потрібен.',
+      stores: { heading: "Або встановіть із магазину застосунків", appStore: "App Store", appStoreNote: "iPhone · iPad · Mac", play: "Google Play", playNote: "Android-смартфони й планшети", msStore: "Microsoft Store", msStoreNote: "Windows 10/11 · x64 + ARM64" },
+      packageManagers: { heading: "Менеджери пакетів", note: "Оновлення надходять разом зі звичайними оновленнями пакетів." },
+      mirror: "Швидше з материкового Китаю: дзеркало на Gitee →",
       platforms: {
         macos: { name: 'macOS', note: 'Universal · Apple Silicon + Intel · нотаризовано', primary: 'Завантажити .dmg' },
         windows: { name: 'Windows', note: 'x64 · Windows 10/11', primary: 'Завантажити .msi', store: 'Або з Microsoft Store' },
         windowsArm: { name: 'Windows (ARM64)', note: 'ARM64 · Snapdragon X · Copilot+ PC · Win на Apple Silicon', primary: 'Завантажити .msi', store: 'Або з Microsoft Store' },
         linux: { name: 'Linux', note: 'x64 · .AppImage / .deb / .rpm', primary: 'Завантажити .AppImage', secondary: '.deb (Debian/Ubuntu)', tertiary: '.rpm (Fedora/RHEL)' },
         linuxArm: { name: 'Linux (ARM64)', note: 'aarch64 · Raspberry Pi 4/5 · ARM-сервери', primary: 'Завантажити .AppImage', secondary: '.deb (arm64)', tertiary: '.rpm (aarch64)' },
-        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · F-Droid / Play Маркет', primary: 'Завантажити універсальний .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
+        android: { name: 'Android', note: 'API 24+ · ARM64 · x86_64 · Play Маркет', primary: 'Завантажити універсальний .apk', secondary: '.apk (arm64-v8a)', tertiary: '.apk (armv7)' },
       },
       notes: {
         macos: 'Перетягніть SoloMD.app у /Applications. Нотаризовано — без попереджень Gatekeeper.',
