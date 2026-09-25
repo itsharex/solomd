@@ -2597,8 +2597,9 @@ function enterPlainSelectAll() {
 
 // ── Editor right-click menu (#210) ─────────────────────────────────────────
 // The webview's own menu came up on Windows without Cut/Copy for a selection
-// the user had just made, so mouse-only users could select but not act. One
-// menu of our own, the same on every editor path. On phones a long-press
+// the user had just made, so mouse-only users could select but not act. On
+// Windows we show a menu of our own, the same on every editor path (macOS and
+// Linux keep the system menu, see onEditorContextMenu). On phones a long-press
 // fires `contextmenu` too; the system selection menu is better there, so we
 // leave it alone.
 const editorCtx = ref<{ x: number; y: number; hasSelection: boolean } | null>(null);
@@ -2621,6 +2622,10 @@ function onEditorMouseDownCapture(event: MouseEvent) {
 function onEditorContextMenu(event: MouseEvent) {
   const pointer = (event as PointerEvent).pointerType;
   if (pointer === 'touch' || pointer === 'pen' || isAndroid() || isIOS()) return;
+  // Windows only. There the WebView2 menu lost the selection (#210). The
+  // macOS and Linux menus handle selections fine, and they carry things ours
+  // can't: spelling suggestions, Look Up, Services, writing tools.
+  if (!isWindowsEditorRuntime()) return;
   event.preventDefault();
   let hasSelection = false;
   if (!usePlainWindowsEditor) {
