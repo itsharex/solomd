@@ -165,6 +165,20 @@ const { t } = useI18n();
 
 const cursorLine = ref(1);
 const cursorCol = ref(1);
+// #350 — in preview mode the outline follows the reading position (the
+// block at the top of the focused pane's preview) instead of the editor
+// cursor, which doesn't move while reading. Null until the preview reports.
+const previewTopLine = ref<number | null>(null);
+window.addEventListener('solomd:preview-topline', (e: Event) => {
+  const { line, paneId } = (e as CustomEvent).detail || {};
+  if (paneId && paneId !== tiles.focusedPaneId) return;
+  if (typeof line === 'number' && line > 0) previewTopLine.value = line;
+});
+const outlineLine = computed(() =>
+  settings.viewMode === 'preview' && previewTopLine.value != null
+    ? previewTopLine.value
+    : cursorLine.value,
+);
 // v4.3.0 issue #70: selection text from the editor, surfaced in StatusBar
 // as "selected: N words / M chars". Empty string when nothing is selected.
 const selectionText = ref('');
@@ -1871,7 +1885,7 @@ watchEffect(() => { void settings.aiEnabled; void settings.aiProvider; refreshAi
                 :prefill="searchPrefill"
                 @close="searchOpen = false"
               />
-              <Outline v-if="p.id === 'outline'" :cursor-line="cursorLine" @goto="onOutlineGoto" />
+              <Outline v-if="p.id === 'outline'" :cursor-line="outlineLine" @goto="onOutlineGoto" />
               <BacklinksPanel v-if="p.id === 'backlinks'" @close="ctxToggle(() => settings.toggleBacklinks())" />
               <RelationshipsPanel v-if="p.id === 'relationships'" @close="ctxToggle(() => settings.toggleRelationships())" />
               <TagsPanel
@@ -1937,7 +1951,7 @@ watchEffect(() => { void settings.aiEnabled; void settings.aiProvider; refreshAi
                 :prefill="searchPrefill"
                 @close="searchOpen = false"
               />
-              <Outline v-if="p.id === 'outline'" :cursor-line="cursorLine" @goto="onOutlineGoto" />
+              <Outline v-if="p.id === 'outline'" :cursor-line="outlineLine" @goto="onOutlineGoto" />
               <BacklinksPanel v-if="p.id === 'backlinks'" @close="ctxToggle(() => settings.toggleBacklinks())" />
               <RelationshipsPanel v-if="p.id === 'relationships'" @close="ctxToggle(() => settings.toggleRelationships())" />
               <TagsPanel

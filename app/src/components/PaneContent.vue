@@ -343,6 +343,15 @@ onBeforeUnmount(() => {
 
 defineExpose({ gotoLine, editorRef });
 
+// #350 — preview mode has no editor cursor to follow, so hand the preview's
+// reading position to the outline instead. Split mode keeps the cursor.
+function onPreviewTopline(line: number) {
+  if (settings.viewMode !== 'preview') return;
+  window.dispatchEvent(new CustomEvent('solomd:preview-topline', {
+    detail: { line, paneId: props.paneId },
+  }));
+}
+
 function onOutlineGotoEvent(e: Event) {
   const { line, paneId } = (e as CustomEvent).detail;
   if (paneId !== props.paneId) return;
@@ -451,6 +460,7 @@ function onPreviewSearchEvent(e: Event) {
         :source="tab.content"
         :file-path="tab.filePath"
         :tab-id="tab.id"
+        @topline="onPreviewTopline"
       />
     </div>
   </div>
