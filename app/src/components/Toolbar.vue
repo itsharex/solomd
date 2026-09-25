@@ -976,8 +976,11 @@ onBeforeUnmount(() => {
         <span class="clean-ai-broom">🧹</span>
         <span class="clean-ai-label">AI</span>
       </button>
+      <!-- #346: hidden until AI is switched on in Settings. With AI off, the
+           button only ever answered "enable AI first". The command palette
+           entry stays, and so does the setting. -->
       <button
-        v-if="!IS_APP_STORE_BUILD"
+        v-if="!IS_APP_STORE_BUILD && settings.aiEnabled"
         class="icon-btn ai-rewrite-btn"
         @mousedown.prevent
         @click="onAIRewrite"
