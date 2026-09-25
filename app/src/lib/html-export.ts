@@ -18,16 +18,24 @@ export const HTML_TEMPLATE = (title: string, body: string, headCss = '') => `<!d
 <meta charset="utf-8">
 <title>${escapeHtml(title)}</title>
 ${headCss ? `<style>${headCss}</style>\n` : ''}<style>
+  /* White paper (#332 follow-up): the warm off-white page, beige code blocks
+     and orange table headers read as "yellow" on screen and looked
+     unprofessional in a file people hand to others. Backgrounds are neutral
+     now; the brand orange is kept only as a thin accent (h1 rule, links,
+     quote bar). Deliberately no dark-mode variant: the file is a document,
+     and mermaid diagrams are rendered for a light page. */
   :root {
-    --brand: #ff9f40;
-    --brand-soft: #ffe7cc;
-    --ink: #1f1d1a;
-    --ink-muted: #6a6560;
-    --rule: #e6e2d8;
-    --paper: #fbfaf6;
-    --code-bg: #f3efe7;
-    --code-key: #ff9f40;
-    --row-alt: #f7f4ec;
+    --brand: #e07b12;
+    --brand-soft: #f6e3cc;
+    --ink: #1f2328;
+    --ink-muted: #59636e;
+    --rule: #e4e6e9;
+    --paper: #ffffff;
+    --code-bg: #f6f8fa;
+    --code-key: #cf222e;
+    --row-alt: #f9fafb;
+    --thead-bg: #f3f4f6;
+    --quote-bg: #f9fafb;
   }
   html, body { background: var(--paper); }
   body {
@@ -84,7 +92,7 @@ ${headCss ? `<style>${headCss}</style>\n` : ''}<style>
     background: var(--code-bg);
     padding: .15em .45em;
     border-radius: 4px;
-    color: #8a4a00;
+    color: #9a3412;
   }
   pre {
     background: var(--code-bg);
@@ -106,7 +114,7 @@ ${headCss ? `<style>${headCss}</style>\n` : ''}<style>
   pre code .hljs-tag { color: var(--code-key); }
   blockquote {
     border-left: 4px solid var(--brand);
-    background: linear-gradient(to right, var(--brand-soft) 0%, transparent 40%);
+    background: var(--quote-bg);
     margin: 1.4em 0;
     padding: .5em 1.2em;
     color: var(--ink-muted);
@@ -131,10 +139,10 @@ ${headCss ? `<style>${headCss}</style>\n` : ''}<style>
   /* #271 — short cells stay on one line (see markdown.ts table_short_cells). */
   .cell-nowrap { white-space: nowrap; }
   thead th {
-    background: var(--brand-soft);
+    background: var(--thead-bg);
     color: var(--ink);
     font-weight: 700;
-    border-bottom: 2px solid var(--brand);
+    border-bottom: 2px solid var(--rule);
   }
   tbody tr:nth-child(even) { background: var(--row-alt); }
   hr {
