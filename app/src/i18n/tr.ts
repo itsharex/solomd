@@ -412,6 +412,12 @@ export const tr: I18n = {
     focusMode: 'Odak Modu — etkin olmayan paragrafları soluklaştır',
     typewriterMode: 'Daktilo Modu — imleci ortada tut',
     vimMode: 'Vim Modu — hjkl gezinme, modlar, ex komutları',
+    windowsEditorEngine: "Düzenleyici motoru (Windows)",
+    windowsEditorEngineNative: "Yerel — giriş yöntemleriyle en iyi uyum (varsayılan)",
+    windowsEditorEngineCodeMirror: "CodeMirror — sözdizimi vurgulama, daha kararlı canlı düzenleme",
+    windowsEditorEngineHint:
+      "Yerel düzenleyici Windows’un kendi metin kutusunu kullanır ve Çince, Japonca ve Korece giriş yöntemleriyle güvenilir çalışır. CodeMirror Markdown sözdizimi vurgulaması ve işlenmiş metinle kaynak arasında zıplamayan canlı düzenleme sunar; ancak WebView2’de bazı giriş yöntemleri ilk karakteri kaybedebilir veya noktalamayı çiftleyebilir. Böyle olursa “Yerel”e geri dönün.",
+    windowsEditorEngineVimHint: "Vim modu her zaman CodeMirror kullanır. Seçmek için Vim modunu kapatın.",
     slashCommandsEnabled: 'Eğik çizgi komutları ( / ) — yeni satırda / yazdığınızda Markdown bloklarıyla (Başlık, liste, kod, tablo…) açılır pencere',
     customCssFixedWarning: 'Bu tema body üzerinde background-attachment: fixed olarak değiştiriyor — body bu özelliğinin değiştirilmesi önerilmez, çünkü sağ kartı sürüklerken tam ekran titremeye neden olur!',
     customCss: 'Özel CSS Teması',

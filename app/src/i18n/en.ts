@@ -413,6 +413,12 @@ export const en = {
     focusMode: 'Focus Mode — dim non-active paragraphs',
     typewriterMode: 'Typewriter Mode — keep cursor centered',
     vimMode: 'Vim Mode — hjkl navigation, modes, ex commands',
+    windowsEditorEngine: "Editor engine (Windows)",
+    windowsEditorEngineNative: "Native — best input-method compatibility (default)",
+    windowsEditorEngineCodeMirror: "CodeMirror — syntax highlighting, steadier live edit",
+    windowsEditorEngineHint:
+      "The native editor uses Windows' own text box, which works reliably with Chinese, Japanese and Korean input methods such as Sogou. CodeMirror adds Markdown syntax highlighting and a live edit that doesn't jump between rendered and source text, but under some input methods in WebView2 it can drop the first character or double punctuation. If that happens, switch back to Native.",
+    windowsEditorEngineVimHint: "Vim mode always uses CodeMirror. Turn Vim mode off to choose.",
     slashCommandsEnabled: 'Slash commands ( / ) — popup with Markdown blocks (Heading, list, code, table…) when you type / on a new line',
     customCssFixedWarning: 'This theme sets background-attachment: fixed on body — it’s not recommended to change body’s background-attachment, as it causes full-screen flicker when dragging the right sidebar.',
     customCss: 'Custom CSS Theme',

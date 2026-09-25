@@ -412,6 +412,12 @@ export const de: I18n = {
     focusMode: 'Fokusmodus — inaktive Absätze abdunkeln',
     typewriterMode: 'Schreibmaschinenmodus — Cursor zentriert halten',
     vimMode: 'Vim-Modus — hjkl-Navigation, Modi, ex-Befehle',
+    windowsEditorEngine: "Editor-Engine (Windows)",
+    windowsEditorEngineNative: "Nativ — beste Kompatibilität mit Eingabemethoden (Standard)",
+    windowsEditorEngineCodeMirror: "CodeMirror — Syntaxhervorhebung, ruhigere Live-Bearbeitung",
+    windowsEditorEngineHint:
+      "Der native Editor nutzt das Windows-eigene Textfeld und funktioniert zuverlässig mit chinesischen, japanischen und koreanischen Eingabemethoden. CodeMirror bietet Markdown-Syntaxhervorhebung und eine Live-Bearbeitung, die nicht zwischen gerendertem Text und Quelltext springt, kann unter WebView2 mit manchen Eingabemethoden aber das erste Zeichen verlieren oder Satzzeichen doppeln. Dann zurück auf „Nativ“ stellen.",
+    windowsEditorEngineVimHint: "Im Vim-Modus wird immer CodeMirror verwendet. Zum Auswählen den Vim-Modus ausschalten.",
     slashCommandsEnabled: 'Slash-Befehle ( / ) — Popup mit Markdown-Blöcken (Überschrift, Liste, Code, Tabelle…), wenn Sie / am Zeilenanfang eingeben',
     customCssFixedWarning: 'Dieses Theme setzt background-attachment: fixed auf body — es wird nicht empfohlen, background-attachment von body zu ändern, da dies beim Ziehen der rechten Seitenleiste zu Vollbild-Flackern führt.',
     customCss: 'Benutzerdefiniertes CSS-Design',

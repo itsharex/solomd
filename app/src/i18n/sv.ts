@@ -412,6 +412,12 @@ export const sv: I18n = {
     focusMode: 'Fokusläge — dämpa icke-aktiva stycken',
     typewriterMode: 'Skrivmaskinsläge — håll markören centrerad',
     vimMode: 'Vim-läge — hjkl-navigering, lägen, ex-kommandon',
+    windowsEditorEngine: "Redigeringsmotor (Windows)",
+    windowsEditorEngineNative: "Inbyggd — bäst kompatibilitet med inmatningsmetoder (standard)",
+    windowsEditorEngineCodeMirror: "CodeMirror — syntaxmarkering, stabilare liveredigering",
+    windowsEditorEngineHint:
+      "Den inbyggda redigeraren använder Windows egen textruta och fungerar pålitligt med kinesiska, japanska och koreanska inmatningsmetoder. CodeMirror ger Markdown-syntaxmarkering och liveredigering som inte hoppar mellan renderad text och källkod, men i WebView2 kan vissa inmatningsmetoder tappa första tecknet eller dubblera skiljetecken. Byt i så fall tillbaka till ”Inbyggd”.",
+    windowsEditorEngineVimHint: "Vim-läget använder alltid CodeMirror. Stäng av Vim-läget för att välja.",
     slashCommandsEnabled: 'Snedstreckskommandon ( / ) — popup med Markdown-block (rubrik, lista, kod, tabell…) när du skriver / på en ny rad',
     customCssFixedWarning: 'Detta tema ändrar background-attachment: fixed på body — det rekommenderas inte att ändra body:s background-attachment, eftersom det orsakar helskärmsflimmer vid dragning av höger sidofält.',
     customCss: 'Anpassat CSS-tema',

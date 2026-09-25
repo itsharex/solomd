@@ -42,7 +42,7 @@ import GithubSyncSettings from './GithubSyncSettings.vue';
 import CloudFolderBanner from './CloudFolderBanner.vue';
 import ProxySettings from './ProxySettings.vue';
 import ThemeMarketplace from './ThemeMarketplace.vue';
-import { isIOS, isMobile, hasGitBackend } from '../lib/platform';
+import { isIOS, isMobile, hasGitBackend, isWindowsEditorRuntime } from '../lib/platform';
 import { loadCustomTheme } from '../lib/custom-theme';
 import { openPath } from '@tauri-apps/plugin-opener';
 import { DsModal } from '../ui';
@@ -263,6 +263,9 @@ watch(
 );
 
 const settings = useSettingsStore();
+// #328/#344 — the editor-engine choice only exists where there are two
+// editors, i.e. Windows (and the ?forcePlain dev hook).
+const windowsEditorRuntime = isWindowsEditorRuntime();
 
 // #246 — dictionaries actually present, so the picker can't offer a language
 // that would fail to load. `spellcheck_list_dicts` scans
@@ -1638,6 +1641,21 @@ function onSelectPdfFont(v: string) {
             <input type="checkbox" :checked="settings.vimMode" @change="settings.toggleVimMode()" />
             {{ t('settings.vimMode') }}
           </label>
+        </section>
+
+        <section v-if="windowsEditorRuntime" data-cat="writing">
+          <label>{{ t('settings.windowsEditorEngine') }}</label>
+          <select
+            :value="settings.vimMode ? 'codemirror' : settings.windowsEditorEngine"
+            :disabled="settings.vimMode"
+            @change="settings.setWindowsEditorEngine(($event.target as HTMLSelectElement).value as 'native' | 'codemirror')"
+          >
+            <option value="native">{{ t('settings.windowsEditorEngineNative') }}</option>
+            <option value="codemirror">{{ t('settings.windowsEditorEngineCodeMirror') }}</option>
+          </select>
+          <p class="setting-hint">
+            {{ settings.vimMode ? t('settings.windowsEditorEngineVimHint') : t('settings.windowsEditorEngineHint') }}
+          </p>
         </section>
 
         <section data-cat="writing">

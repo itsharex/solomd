@@ -414,6 +414,12 @@ export const pt: I18n = {
     focusMode: 'Modo foco — atenuar parágrafos inativos',
     typewriterMode: 'Modo máquina de escrever — manter cursor centralizado',
     vimMode: 'Modo Vim — navegação hjkl, modos, comandos ex',
+    windowsEditorEngine: "Motor do editor (Windows)",
+    windowsEditorEngineNative: "Nativo — melhor compatibilidade com métodos de entrada (padrão)",
+    windowsEditorEngineCodeMirror: "CodeMirror — realce de sintaxe, edição ao vivo mais estável",
+    windowsEditorEngineHint:
+      "O editor nativo usa a caixa de texto do Windows e funciona de forma confiável com métodos de entrada chineses, japoneses e coreanos. O CodeMirror adiciona realce de sintaxe Markdown e uma edição ao vivo que não pula entre o texto renderizado e o código, mas no WebView2 alguns métodos de entrada podem perder o primeiro caractere ou duplicar a pontuação. Se isso acontecer, volte para “Nativo”.",
+    windowsEditorEngineVimHint: "O modo Vim sempre usa o CodeMirror. Desative o modo Vim para escolher.",
     slashCommandsEnabled: 'Comandos slash ( / ) — popup com blocos Markdown (título, lista, código, tabela…) ao digitar / no início da linha',
     customCssFixedWarning: 'Este tema define background-attachment: fixed no body — não é recomendado alterar background-attachment do body, pois causa cintilação em tela cheia ao arrastar a barra lateral direita.',
     customCss: 'Tema CSS personalizado',

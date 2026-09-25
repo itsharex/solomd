@@ -412,6 +412,12 @@ export const nl: I18n = {
     focusMode: 'Focusmodus — niet-actieve alinea\'s dimmen',
     typewriterMode: 'Typemachinemodus — cursor in het midden houden',
     vimMode: 'Vim-modus — hjkl-navigatie, modi, ex-opdrachten',
+    windowsEditorEngine: "Editor-engine (Windows)",
+    windowsEditorEngineNative: "Native — beste compatibiliteit met invoermethoden (standaard)",
+    windowsEditorEngineCodeMirror: "CodeMirror — syntaxmarkering, rustiger live bewerken",
+    windowsEditorEngineHint:
+      "De native editor gebruikt het eigen tekstvak van Windows en werkt betrouwbaar met Chinese, Japanse en Koreaanse invoermethoden. CodeMirror voegt Markdown-syntaxmarkering toe en live bewerken dat niet verspringt tussen weergave en bron, maar onder WebView2 kunnen sommige invoermethoden het eerste teken verliezen of leestekens verdubbelen. Schakel in dat geval terug naar ‘Native’.",
+    windowsEditorEngineVimHint: "Vim-modus gebruikt altijd CodeMirror. Zet Vim-modus uit om te kiezen.",
     slashCommandsEnabled: 'Slash-opdrachten ( / ) — pop-up met Markdown-blokken (kop, lijst, code, tabel…) wanneer je / typt op een nieuwe regel',
     customCssFixedWarning: 'Dit thema wijzigt background-attachment: fixed op body — het wordt afgeraden body’s background-attachment te wijzigen, omdat dit bij het slepen van de rechterzijbalk tot volledig scherm flikkeren leidt.',
     customCss: 'Aangepast CSS-thema',

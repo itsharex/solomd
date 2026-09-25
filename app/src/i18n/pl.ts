@@ -412,6 +412,12 @@ export const pl: I18n = {
     focusMode: 'Tryb skupienia — przyciemnij nieaktywne akapity',
     typewriterMode: 'Tryb maszyny do pisania — kursor wycentrowany',
     vimMode: 'Tryb Vim — nawigacja hjkl, tryby, polecenia ex',
+    windowsEditorEngine: "Silnik edytora (Windows)",
+    windowsEditorEngineNative: "Natywny — najlepsza zgodność z metodami wprowadzania (domyślnie)",
+    windowsEditorEngineCodeMirror: "CodeMirror — podświetlanie składni, stabilniejsza edycja na żywo",
+    windowsEditorEngineHint:
+      "Edytor natywny korzysta z pola tekstowego Windows i działa niezawodnie z chińskimi, japońskimi i koreańskimi metodami wprowadzania. CodeMirror dodaje podświetlanie składni Markdown i edycję na żywo, która nie przeskakuje między tekstem sformatowanym a źródłem, ale w WebView2 niektóre metody wprowadzania mogą gubić pierwszy znak lub dublować interpunkcję. W takim przypadku wróć do „Natywny”.",
+    windowsEditorEngineVimHint: "Tryb Vim zawsze używa CodeMirror. Wyłącz tryb Vim, aby wybrać.",
     slashCommandsEnabled: 'Polecenia ukośnikowe ( / ) — popup z blokami Markdown (nagłówek, lista, kod, tabela…) po wpisaniu / w nowej linii',
     customCssFixedWarning: 'Ten motyw zmienia background-attachment: fixed na body — nie zaleca się zmieniania background-attachment na body, ponieważ powoduje to migotanie całego ekranu podczas przeciągania prawego panelu.',
     customCss: 'Niestandardowy motyw CSS',

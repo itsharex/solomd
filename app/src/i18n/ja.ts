@@ -412,6 +412,12 @@ export const ja: I18n = {
     focusMode: 'フォーカスモード — 非アクティブ段落を淡くする',
     typewriterMode: 'タイプライターモード — カーソルを中央に固定',
     vimMode: 'Vim モード — hjkl ナビゲーション、モード、ex コマンド',
+    windowsEditorEngine: "エディターエンジン（Windows）",
+    windowsEditorEngineNative: "ネイティブ — IME との互換性が最も高い（既定）",
+    windowsEditorEngineCodeMirror: "CodeMirror — シンタックスハイライト、安定したライブ編集",
+    windowsEditorEngineHint:
+      "ネイティブは Windows 標準のテキストボックスを使い、中国語・日本語・韓国語の IME で安定して入力できます。CodeMirror は Markdown のシンタックスハイライトと、表示とソースが切り替わって跳ねないライブ編集を提供しますが、WebView2 では一部の IME で最初の文字が消えたり句読点が重複したりすることがあります。その場合は「ネイティブ」に戻してください。",
+    windowsEditorEngineVimHint: "Vim モードでは常に CodeMirror を使います。選択するには Vim モードをオフにしてください。",
     slashCommandsEnabled: 'スラッシュコマンド ( / ) — 新しい行で / を入力すると Markdown ブロック（見出し、リスト、コード、テーブル…）のポップアップが表示',
     customCssFixedWarning: 'このテーマは body の background-attachment を fixed に変更しています — body のこの属性は変更しないことをお勧めします。変更すると、右側カードをドラッグする際に全画面でちらつきます！',
     customCss: 'カスタム CSS テーマ',

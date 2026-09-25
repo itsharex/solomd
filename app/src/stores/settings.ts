@@ -82,6 +82,10 @@ interface Settings {
   /** Hint keys already shown — `bold`, `heading`, … Never shown twice. */
   formatHintsSeen: string[];
   vimMode: boolean;
+  /** Windows only: 'native' textarea (IME-safe, default) or 'codemirror'
+   *  (syntax highlighting, non-jumping live edit) — #328, #344. Vim mode
+   *  forces CodeMirror regardless. Ignored on other platforms. */
+  windowsEditorEngine: 'native' | 'codemirror';
   uiFontSize: number;
   language: 'en' | 'zh' | 'ja' | 'ko' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'nl' | 'tr' | 'sv' | 'uk';
   autoCheckUpdate: boolean;
@@ -536,6 +540,7 @@ function defaults(): Settings {
     formatHints: true,
     formatHintsSeen: [],
     vimMode: false,
+    windowsEditorEngine: 'native',
     uiFontSize: 13,
     autoCheckUpdate: true,
     language: (() => {
@@ -719,6 +724,7 @@ function load(): Settings {
       merged.pdfDefaults = mergePdfDefaults(parsed.pdfDefaults);
       // #180 — keybindings is a free-form map, so a tampered or older blob
       // could put anything here; keep only string/null values.
+      if (merged.windowsEditorEngine !== 'codemirror') merged.windowsEditorEngine = 'native';
       merged.keybindings = {};
       if (parsed.keybindings && typeof parsed.keybindings === 'object') {
         for (const [k, v] of Object.entries(parsed.keybindings)) {
@@ -1027,6 +1033,10 @@ export const useSettingsStore = defineStore('settings', {
     },
     toggleVimMode() {
       this.vimMode = !this.vimMode;
+      this.persist();
+    },
+    setWindowsEditorEngine(engine: 'native' | 'codemirror') {
+      this.windowsEditorEngine = engine === 'codemirror' ? 'codemirror' : 'native';
       this.persist();
     },
     toggleAutoCheckUpdate() {

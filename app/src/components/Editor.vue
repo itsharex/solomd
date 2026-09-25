@@ -251,7 +251,13 @@ const isWindows = isWindowsEditorRuntime();
 // textarea fallback. Opting into Vim therefore explicitly opts into CodeMirror
 // on Windows; PaneContent keys the editor by this setting so the switch happens
 // immediately instead of requiring an app restart (#194).
-const usePlainWindowsEditor = shouldUsePlainWindowsEditor(isWindows, settings.vimMode);
+// The user can also choose CodeMirror outright on Windows (Settings → Editor
+// engine, #328/#344) — same remount path, without the Vim keymap.
+const usePlainWindowsEditor = shouldUsePlainWindowsEditor(
+  isWindows,
+  settings.vimMode,
+  settings.windowsEditorEngine,
+);
 
 // One-time "there is a key for that" tips. Fed from all three input paths
 // below — the same rule as every other editing feature in this file.
