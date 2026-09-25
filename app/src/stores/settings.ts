@@ -300,6 +300,11 @@ interface Settings {
   // one (a single click then only selects the folder, e.g. as the target of
   // "new file"). Files always open on a single click. Default off.
   explorerDoubleClickFolders: boolean;
+  // #333 — the Explorer follows the active document: switching tabs (or
+  // opening a file) expands the file's folders and scrolls its row into view,
+  // like an IDE's "always select opened file". Default on. It never re-roots
+  // the workspace: a file outside it is simply not followed.
+  explorerFollowActive: boolean;
   // Show dot-files / dot-folders in the Explorer tree. Off by default: a
   // vault's `.git`, `.obsidian` and friends are noise for most people. On,
   // they're reachable from inside the app instead of only from Finder.
@@ -640,6 +645,7 @@ function defaults(): Settings {
     codeBlockWrap: false,
     explorerFullNames: false,
     explorerDoubleClickFolders: false,
+    explorerFollowActive: true,
     explorerShowHidden: false,
     explorerExtFilter: [] as string[],
     distinctSplitPanes: false,
@@ -1346,6 +1352,10 @@ export const useSettingsStore = defineStore('settings', {
     },
     toggleExplorerDoubleClickFolders() {
       this.explorerDoubleClickFolders = !this.explorerDoubleClickFolders;
+      this.persist();
+    },
+    toggleExplorerFollowActive() {
+      this.explorerFollowActive = !this.explorerFollowActive;
       this.persist();
     },
     toggleExplorerShowHidden() {

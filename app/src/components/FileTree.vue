@@ -890,14 +890,20 @@ function flashRow(path: string, row: HTMLElement) {
 }
 
 /** Expand every folder on the way down, then flash the row. False when the
- *  file is not reachable in the tree (filtered out, hidden, or truncated). */
-async function revealRow(path: string): Promise<boolean> {
+ *  file is not reachable in the tree (filtered out, hidden, or truncated).
+ *
+ *  `quiet` is the automatic follow (#333): no flash, and the row is only
+ *  scrolled as far as needed to be visible, so switching between two files
+ *  that are both on screen does not move the tree at all. */
+async function revealRow(path: string, quiet = false): Promise<boolean> {
+  const show = (row: HTMLElement) =>
+    quiet ? row.scrollIntoView({ block: 'nearest' }) : flashRow(path, row);
   // Already rendered — its ancestors are expanded. Checked first because it
   // also covers SAF vaults, whose node paths are opaque `saf:<docId>` values
   // that cannot be walked by prefix.
   const shown = rowElementFor(path);
   if (shown) {
-    flashRow(path, shown);
+    show(shown);
     return true;
   }
   const parts = segmentsUnderRoot(path);
@@ -913,7 +919,7 @@ async function revealRow(path: string): Promise<boolean> {
   await nextTick();
   const row = rowElementFor(path);
   if (!row) return false;
-  flashRow(path, row);
+  show(row);
   return true;
 }
 
@@ -936,6 +942,30 @@ watch(
   // reveal can arrive (and park) while this component does not exist yet —
   // a request that is already set when the tree mounts would otherwise never
   // be seen, because a non-immediate watcher only reacts to later changes.
+  { immediate: true },
+);
+
+// #333 — follow the active document. Switching tabs (or opening a file)
+// expands the folders above it and brings its row into view, the way an IDE's
+// "always select opened file" does; the row is already highlighted because
+// the active file is the selection (see `selected` above). Quiet on purpose:
+// no flash, no toast when the file is filtered out, and never a workspace
+// re-root — a document outside the open folder is simply not followed. Only
+// the tab changing triggers it, so the tree is not yanked back while the user
+// scrolls it.
+watch(
+  [() => tabs.activeTab?.filePath, () => root.value?.path, () => root.value?.loading],
+  ([path, , loading]) => {
+    if (!settings.explorerFollowActive || !path || loading || !root.value) return;
+    if (segmentsUnderRoot(path) === null && !rowElementFor(path)) return;
+    void revealRow(path, true).then((ok) => {
+      // A workspace load clears the selection (see the root watcher above),
+      // which also dropped the highlight when the tab was opened before the
+      // tree had listed. The followed file is inside this tree, so it is the
+      // selection again.
+      if (ok && tabs.activeTab?.filePath === path) selected.value = { path, isDir: false };
+    });
+  },
   { immediate: true },
 );
 

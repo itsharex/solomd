@@ -317,6 +317,8 @@ export const tr: I18n = {
     explorerFullNamesHint: 'Kenar çubuğu ağacındaki uzun dosya adlarını ortadan kısaltmak yerine alt satıra kaydırarak tam gösterir.',
     explorerDoubleClickFolders: 'Gezginde klasörleri çift tıklamayla aç',
     explorerDoubleClickFoldersHint: 'Bir klasöre tek tıklamak yalnızca onu seçer (örneğin yeni dosyanın konumu olarak); çift tıklama açar veya kapatır. Dosyalar her zaman tek tıklamayla açılır.',
+    explorerFollowActive: "Gezginde etkin dosyayı takip et",
+    explorerFollowActiveHint: "Sekme değiştirdiğinizde veya bir dosya açtığınızda gezgin klasörlerini genişletir ve dosyaya kaydırır. Açık klasörün dışındaki dosyalar takip edilmez.",
     explorerShowHidden: 'Gizli dosyaları göster',
     explorerShowHiddenHint: 'Nokta ile başlayan dosya ve klasörleri (.git, .obsidian, .gitignore) ve görsel eki klasörlerini (_assets, *.assets) dosya ağacında listeler.',
     distinctSplitPanes: 'Düzenleyici ile önizlemeyi ayırt et',

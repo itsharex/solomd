@@ -317,6 +317,8 @@ export const ko: I18n = {
     explorerFullNamesHint: '사이드바 트리에서 긴 파일 이름을 중간 생략 대신 줄 바꿈하여 전체 표시합니다.',
     explorerDoubleClickFolders: '탐색기에서 폴더를 더블클릭으로 열기',
     explorerDoubleClickFoldersHint: '폴더를 한 번 클릭하면 선택만 되고(예: 새 파일을 만들 위치), 더블클릭하면 열리거나 닫힙니다. 파일은 항상 한 번 클릭으로 열립니다.',
+    explorerFollowActive: "탐색기에서 활성 파일 따라가기",
+    explorerFollowActiveHint: "탭을 전환하거나 파일을 열면 탐색기가 해당 폴더를 펼치고 파일로 스크롤합니다. 열린 폴더 밖의 파일은 따라가지 않습니다.",
     explorerShowHidden: '숨김 파일 표시',
     explorerShowHiddenHint: '점으로 시작하는 파일과 폴더(.git, .obsidian, .gitignore)와 이미지 첨부 폴더(_assets, *.assets)를 파일 트리에 표시합니다.',
     distinctSplitPanes: '편집 영역과 미리보기 구분',

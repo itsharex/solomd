@@ -785,6 +785,18 @@ function onSelectPdfFont(v: string) {
           <label>
             <input
               type="checkbox"
+              :checked="settings.explorerFollowActive"
+              @change="settings.toggleExplorerFollowActive()"
+            />
+            {{ t('settings.explorerFollowActive') }}
+          </label>
+          <p class="setting-hint">{{ t('settings.explorerFollowActiveHint') }}</p>
+        </section>
+
+        <section data-cat="basics">
+          <label>
+            <input
+              type="checkbox"
               :checked="settings.explorerShowHidden"
               @change="settings.toggleExplorerShowHidden()"
             />

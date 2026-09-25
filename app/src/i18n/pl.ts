@@ -317,6 +317,8 @@ export const pl: I18n = {
     explorerFullNamesHint: 'Zawija długie nazwy plików w drzewie bocznym zamiast skracać je wielokropkiem w środku.',
     explorerDoubleClickFolders: 'Otwieraj foldery w eksploratorze dwukrotnym kliknięciem',
     explorerDoubleClickFoldersHint: 'Pojedyncze kliknięcie folderu tylko go zaznacza (np. jako miejsce na nowy plik); dwukrotne kliknięcie go otwiera lub zamyka. Pliki zawsze otwierają się pojedynczym kliknięciem.',
+    explorerFollowActive: "Śledź aktywny plik w eksploratorze",
+    explorerFollowActiveHint: "Po przełączeniu karty lub otwarciu pliku eksplorator rozwija jego foldery i przewija do niego. Pliki spoza otwartego folderu nie są śledzone.",
     explorerShowHidden: 'Pokaż ukryte pliki',
     explorerShowHiddenHint: 'Wyświetla pliki i foldery zaczynające się od kropki (.git, .obsidian, .gitignore) oraz foldery z załącznikami graficznymi (_assets, *.assets) w drzewie plików.',
     distinctSplitPanes: 'Odróżnij edytor od podglądu',

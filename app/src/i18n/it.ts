@@ -317,6 +317,8 @@ export const it: I18n = {
     explorerFullNamesHint: 'Manda a capo i nomi lunghi nell’albero laterale invece di abbreviarli con i puntini centrali.',
     explorerDoubleClickFolders: 'Apri le cartelle dell’esplora risorse con doppio clic',
     explorerDoubleClickFoldersHint: 'Un clic su una cartella la seleziona soltanto (ad esempio come destinazione di un nuovo file); un doppio clic la apre o la chiude. I file si aprono sempre con un solo clic.',
+    explorerFollowActive: "Segui il file attivo nell’esplora risorse",
+    explorerFollowActiveHint: "Quando cambi scheda o apri un file, l’esplora risorse espande le sue cartelle e scorre fino al file. I file fuori dalla cartella aperta non vengono seguiti.",
     explorerShowHidden: 'Mostra i file nascosti',
     explorerShowHiddenHint: 'Elenca file e cartelle che iniziano con un punto (.git, .obsidian, .gitignore) e le cartelle degli allegati immagine (_assets, *.assets) nell’albero laterale.',
     distinctSplitPanes: 'Distingui editor e anteprima',

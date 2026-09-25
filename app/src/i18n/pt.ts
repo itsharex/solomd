@@ -319,6 +319,8 @@ export const pt: I18n = {
     explorerFullNamesHint: 'Quebra nomes longos na árvore lateral em vez de encurtá-los com reticências no meio.',
     explorerDoubleClickFolders: 'Abrir pastas do explorador com clique duplo',
     explorerDoubleClickFoldersHint: 'Um clique numa pasta apenas a seleciona (por exemplo, como destino de um novo arquivo); um clique duplo a abre ou fecha. Arquivos sempre abrem com um clique.',
+    explorerFollowActive: "Seguir o arquivo ativo no explorador",
+    explorerFollowActiveHint: "Ao trocar de aba ou abrir um arquivo, o explorador expande as pastas dele e rola até ele. Arquivos fora da pasta aberta não são seguidos.",
     explorerShowHidden: 'Mostrar arquivos ocultos',
     explorerShowHiddenHint: 'Lista arquivos e pastas que começam com ponto (.git, .obsidian, .gitignore) e as pastas de imagens anexadas (_assets, *.assets) na árvore do explorador.',
     distinctSplitPanes: 'Distinguir o editor da pré-visualização',

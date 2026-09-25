@@ -317,6 +317,8 @@ export const ja: I18n = {
     explorerFullNamesHint: 'サイドバーのツリーで長いファイル名を中央省略せず、折り返して完全に表示します。',
     explorerDoubleClickFolders: 'エクスプローラーでフォルダーをダブルクリックで開く',
     explorerDoubleClickFoldersHint: 'フォルダーをシングルクリックすると選択のみ(新規ファイルの作成先などに使われます)、ダブルクリックで開閉します。ファイルは常にシングルクリックで開きます。',
+    explorerFollowActive: "エクスプローラーでアクティブなファイルを追従",
+    explorerFollowActiveHint: "タブを切り替えたりファイルを開いたりすると、エクスプローラーがそのフォルダーを展開してファイルまでスクロールします。開いているフォルダー外のファイルは追従しません。",
     explorerShowHidden: '隠しファイルを表示',
     explorerShowHiddenHint: 'ドットで始まるファイルとフォルダー（.git、.obsidian、.gitignore など）と、画像の添付フォルダー（_assets、*.assets）をファイルツリーに表示します。',
     distinctSplitPanes: '編集エリアとプレビューを見分けやすくする',

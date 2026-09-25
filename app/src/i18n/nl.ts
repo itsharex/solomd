@@ -317,6 +317,8 @@ export const nl: I18n = {
     explorerFullNamesHint: 'Laat lange bestandsnamen in de zijbalkboom teruglopen in plaats van ze in het midden af te korten.',
     explorerDoubleClickFolders: 'Mappen in de verkenner openen met dubbelklik',
     explorerDoubleClickFoldersHint: 'Eén klik op een map selecteert hem alleen (bijvoorbeeld als plek voor een nieuw bestand); dubbelklikken opent of sluit hem. Bestanden openen altijd met één klik.',
+    explorerFollowActive: "Actief bestand volgen in de verkenner",
+    explorerFollowActiveHint: "Bij het wisselen van tabblad of openen van een bestand klapt de verkenner de mappen uit en scrolt naar het bestand. Bestanden buiten de geopende map worden niet gevolgd.",
     explorerShowHidden: 'Verborgen bestanden tonen',
     explorerShowHiddenHint: 'Toont bestanden en mappen die met een punt beginnen (.git, .obsidian, .gitignore) en mappen met afbeeldingsbijlagen (_assets, *.assets) in de verkennerboom.',
     distinctSplitPanes: 'Editor en voorbeeld onderscheiden',

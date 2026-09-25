@@ -317,6 +317,8 @@ export const sv: I18n = {
     explorerFullNamesHint: 'Radbryter långa filnamn i sidofältsträdet i stället för att korta dem med ellips i mitten.',
     explorerDoubleClickFolders: 'Öppna mappar i utforskaren med dubbelklick',
     explorerDoubleClickFoldersHint: 'Ett klick på en mapp markerar den bara (till exempel som plats för en ny fil); ett dubbelklick öppnar eller stänger den. Filer öppnas alltid med ett klick.',
+    explorerFollowActive: "Följ den aktiva filen i utforskaren",
+    explorerFollowActiveHint: "När du byter flik eller öppnar en fil fäller utforskaren ut dess mappar och rullar till den. Filer utanför den öppna mappen följs inte.",
     explorerShowHidden: 'Visa dolda filer',
     explorerShowHiddenHint: 'Visar filer och mappar som börjar med punkt (.git, .obsidian, .gitignore) samt mappar med bildbilagor (_assets, *.assets) i filträdet.',
     distinctSplitPanes: 'Skilj redigeraren från förhandsvisningen',

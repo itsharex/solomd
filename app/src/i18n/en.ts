@@ -318,6 +318,8 @@ export const en = {
     explorerFullNamesHint: 'Wraps long file names across lines in the sidebar tree instead of shortening them with a middle ellipsis.',
     explorerDoubleClickFolders: 'Double-click to open folders in Explorer',
     explorerDoubleClickFoldersHint: 'A single click on a folder only selects it (e.g. as the place a new file goes); a double click opens or closes it. Files always open on a single click.',
+    explorerFollowActive: "Follow the active file in Explorer",
+    explorerFollowActiveHint: "When you switch tabs or open a file, the Explorer expands its folders and scrolls to it. Files outside the open folder are not followed.",
     explorerShowHidden: 'Show hidden files',
     explorerShowHiddenHint: 'Lists dot-files and dot-folders (.git, .obsidian, .gitignore) and image attachment folders (_assets, *.assets) in the Explorer tree.',
     distinctSplitPanes: 'Distinguish the editor and preview panes',

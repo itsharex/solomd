@@ -317,6 +317,8 @@ export const es: I18n = {
     explorerFullNamesHint: 'Ajusta los nombres largos en el árbol lateral en lugar de acortarlos con puntos suspensivos en el medio.',
     explorerDoubleClickFolders: 'Abrir carpetas del explorador con doble clic',
     explorerDoubleClickFoldersHint: 'Un clic en una carpeta solo la selecciona (por ejemplo, como destino de un archivo nuevo); un doble clic la abre o la cierra. Los archivos siempre se abren con un solo clic.',
+    explorerFollowActive: "Seguir el archivo activo en el explorador",
+    explorerFollowActiveHint: "Al cambiar de pestaña o abrir un archivo, el explorador despliega sus carpetas y se desplaza hasta él. Los archivos fuera de la carpeta abierta no se siguen.",
     explorerShowHidden: 'Mostrar archivos ocultos',
     explorerShowHiddenHint: 'Muestra archivos y carpetas que empiezan por punto (.git, .obsidian, .gitignore) y las carpetas de imágenes adjuntas (_assets, *.assets) en el árbol del explorador.',
     distinctSplitPanes: 'Distinguir el editor de la vista previa',

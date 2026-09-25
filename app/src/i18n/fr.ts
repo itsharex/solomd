@@ -317,6 +317,8 @@ export const fr: I18n = {
     explorerFullNamesHint: 'Replie les noms de fichiers longs dans l’arborescence au lieu de les raccourcir par une ellipse centrale.',
     explorerDoubleClickFolders: 'Ouvrir les dossiers de l’explorateur par double-clic',
     explorerDoubleClickFoldersHint: 'Un simple clic sur un dossier le sélectionne seulement (par exemple comme emplacement d’un nouveau fichier) ; un double-clic l’ouvre ou le ferme. Les fichiers s’ouvrent toujours d’un simple clic.',
+    explorerFollowActive: "Suivre le fichier actif dans l’explorateur",
+    explorerFollowActiveHint: "Quand vous changez d’onglet ou ouvrez un fichier, l’explorateur déplie ses dossiers et défile jusqu’à lui. Les fichiers hors du dossier ouvert ne sont pas suivis.",
     explorerShowHidden: 'Afficher les fichiers masqués',
     explorerShowHiddenHint: 'Affiche les fichiers et dossiers commençant par un point (.git, .obsidian, .gitignore) ainsi que les dossiers de pièces jointes images (_assets, *.assets) dans l’arborescence.',
     distinctSplitPanes: 'Distinguer l’éditeur de l’aperçu',

@@ -319,6 +319,8 @@ export const zh: I18n = {
     explorerFullNamesHint: '侧边栏文件树中的长文件名换行完整显示,不再用省略号截断中段。',
     explorerDoubleClickFolders: '文件树中双击展开文件夹',
     explorerDoubleClickFoldersHint: '单击文件夹只选中它(例如作为新建文件的位置),双击才展开或折叠。文件始终单击打开。',
+    explorerFollowActive: "文件树跟随当前文件",
+    explorerFollowActiveHint: "切换标签页或打开文件时,文件树自动展开所在文件夹并滚动到该文件。不在当前打开文件夹里的文件不会跟随。",
     explorerShowHidden: '显示隐藏文件',
     explorerShowHiddenHint: '在文件树里列出以点开头的文件和文件夹（.git、.obsidian、.gitignore 等），以及存放图片附件的文件夹（_assets、*.assets）。',
     distinctSplitPanes: '区分编辑区与预览区',
