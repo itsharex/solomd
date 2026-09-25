@@ -231,6 +231,7 @@ export const sv: I18n = {
   },
   statusbar: {
     ln: 'Rad',
+    lines: 'rader',
     col: 'Kol',
     chars: 'tecken',
     words: 'ord',

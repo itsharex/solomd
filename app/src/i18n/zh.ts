@@ -233,6 +233,7 @@ export const zh: I18n = {
   },
   statusbar: {
     ln: '行',
+    lines: '行',
     col: '列',
     chars: '字符',
     words: '词',

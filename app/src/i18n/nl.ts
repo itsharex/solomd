@@ -231,6 +231,7 @@ export const nl: I18n = {
   },
   statusbar: {
     ln: 'Rg',
+    lines: 'regels',
     col: 'Kol',
     chars: 'tekens',
     words: 'woorden',

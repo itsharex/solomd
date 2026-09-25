@@ -231,6 +231,7 @@ export const ko: I18n = {
   },
   statusbar: {
     ln: '행',
+    lines: '줄',
     col: '열',
     chars: '문자',
     words: '단어',

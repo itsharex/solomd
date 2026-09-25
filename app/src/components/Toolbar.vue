@@ -1082,7 +1082,7 @@ onBeforeUnmount(() => {
           v-if="settings.pomodoroShowControls"
           class="icon-btn pomo-chevron"
           @click="togglePomo"
-          :title="t('pomodoro.openMenu')"
+          :title="t('pomodoro.openMenu', { key: chord('pomodoro.startLast') || '—' })"
           aria-haspopup="dialog"
           :aria-expanded="pomoOpen"
         >

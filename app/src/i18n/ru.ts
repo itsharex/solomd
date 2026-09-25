@@ -231,6 +231,7 @@ export const ru: I18n = {
   },
   statusbar: {
     ln: 'Стр',
+    lines: 'строк',
     col: 'Стлб',
     chars: 'симв.',
     words: 'слов',
@@ -1210,6 +1211,8 @@ export const ru: I18n = {
   },
   reading: {
     exit: 'Выйти из режима чтения',
+    toEdit: 'Перейти в режим правки',
+    toEditTooltip: 'Перейти в режим правки (Esc)',
     exitTooltip: 'Выйти из режима чтения (Esc)',
     empty: 'Нет открытого документа.',
     settingHeading: 'Режим чтения',
@@ -1800,6 +1803,7 @@ export const ru: I18n = {
       split: 'Вид: разделение',
       preview: 'Вид: только просмотр',
       cycleView: 'Вид: сменить режим',
+      toggleLiveEdit: 'Вид: живое редактирование / только правка',
       toggleOutline: 'Вид: показать/скрыть оглавление',
       toggleReading: 'Вид: режим чтения',
       toggleFileTree: 'Вид: показать/скрыть дерево файлов',

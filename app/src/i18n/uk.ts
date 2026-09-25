@@ -231,6 +231,7 @@ export const uk: I18n = {
   },
   statusbar: {
     ln: 'Ряд',
+    lines: 'рядків',
     col: 'Кол',
     chars: 'симв.',
     words: 'слів',

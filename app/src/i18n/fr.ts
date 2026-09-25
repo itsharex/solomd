@@ -231,6 +231,7 @@ export const fr: I18n = {
   },
   statusbar: {
     ln: 'Lg',
+    lines: 'lignes',
     col: 'Col',
     chars: 'caractères',
     words: 'mots',

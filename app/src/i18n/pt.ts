@@ -233,6 +233,7 @@ export const pt: I18n = {
   },
   statusbar: {
     ln: 'Lin',
+    lines: 'linhas',
     col: 'Col',
     chars: 'caracteres',
     words: 'palavras',

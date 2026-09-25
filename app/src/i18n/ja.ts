@@ -231,6 +231,7 @@ export const ja: I18n = {
   },
   statusbar: {
     ln: '行',
+    lines: '行',
     col: '列',
     chars: '文字',
     words: '語',

@@ -232,6 +232,7 @@ export const en = {
   },
   statusbar: {
     ln: 'Ln',
+    lines: 'lines',
     col: 'Col',
     chars: 'chars',
     words: 'words',

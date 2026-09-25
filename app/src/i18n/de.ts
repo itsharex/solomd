@@ -231,6 +231,7 @@ export const de: I18n = {
   },
   statusbar: {
     ln: 'Z',
+    lines: 'Zeilen',
     col: 'Sp',
     chars: 'Zeichen',
     words: 'Wörter',

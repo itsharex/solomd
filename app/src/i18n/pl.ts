@@ -231,6 +231,7 @@ export const pl: I18n = {
   },
   statusbar: {
     ln: 'Wrs',
+    lines: 'wierszy',
     col: 'Kol',
     chars: 'znaków',
     words: 'słów',

@@ -231,6 +231,7 @@ export const tr: I18n = {
   },
   statusbar: {
     ln: 'Sat',
+    lines: 'satır',
     col: 'Sütun',
     chars: 'karakter',
     words: 'kelime',
