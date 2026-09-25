@@ -210,7 +210,7 @@ MCP server 是独立 crate,在 `mcp-server/` 目录;端到端测试用的 dev MC
 <!-- sponsors:start -->
 ## 赞助者
 
-还没有赞助者。欢迎成为第一位：[solomd.app/#sponsor](https://solomd.app/#sponsor)。
+感谢这些朋友对 SoloMD 的赞助：**tyysoft(太阳雨)**
 <!-- sponsors:end -->
 
 ## License & 致谢

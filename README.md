@@ -246,7 +246,7 @@ One maintainer, two front doors. Async on [GitHub Discussions](https://github.co
 <!-- sponsors:start -->
 ## Sponsors
 
-No sponsors listed yet. Be the first: [solomd.app/#sponsor](https://solomd.app/#sponsor).
+Thank you to everyone who sponsors SoloMD: **tyysoft(太阳雨)**
 <!-- sponsors:end -->
 
 ## License & credits
