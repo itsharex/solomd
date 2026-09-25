@@ -654,7 +654,7 @@ watchEffect(() => {
 // already made.
 let themeAppliedOnce = false;
 watchEffect(() => {
-  document.documentElement.setAttribute('data-theme', dataThemeFor(settings.theme));
+  document.documentElement.setAttribute('data-theme', dataThemeFor(settings.theme, !!settings.customCssPath));
   const overriddenBy = settings.customCssPath;
   if (!themeAppliedOnce) {
     themeAppliedOnce = true;

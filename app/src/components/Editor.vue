@@ -2865,7 +2865,7 @@ function buildExtensions() {
     richCompartment.of(
       windowsImeSafeMode ? [] : richExtensionsFor(props.tab),
     ),
-    themeCompartment.of(cmThemeFor(settings.theme)),
+    themeCompartment.of(cmThemeFor(settings.theme, !!settings.customCssPath)),
     vimCompartment.of(settings.vimMode ? vim() : []),
     fontSizeCompartment.of(fontSizeTheme(settings.fontSize, settings.fontFamily)),
     spellCheckCompartment.of(spellCheckExt(props.spellCheck)),
@@ -3588,9 +3588,9 @@ watch(
 );
 
 watch(
-  () => settings.theme,
-  (t) => {
-    view?.dispatch({ effects: themeCompartment.reconfigure(cmThemeFor(t)) });
+  () => [settings.theme, !!settings.customCssPath] as const,
+  ([t, custom]) => {
+    view?.dispatch({ effects: themeCompartment.reconfigure(cmThemeFor(t, custom)) });
   }
 );
 
