@@ -420,7 +420,7 @@ export function buildPrintStyle(opts: ResolvedPdfOptions): string {
     : '';
   const fontSizeDecl = `body, .preview-content, .solomd-print-content { font-size: ${fontSizePt}pt !important; }`;
   const codeThemeDecl = codeTheme === 'light'
-    ? `pre, code { background: #f3efe7 !important; color: #1f1d1a !important; }`
+    ? `pre, code { background: #f6f8fa !important; color: #1f2328 !important; }`
     : codeTheme === 'dark'
     ? `pre, code { background: #1f1d1a !important; color: #eee !important; }`
     : '';

@@ -947,18 +947,22 @@ body.solomd-printing {
    itself never flashes a different palette on screen.
 
    `follow` adds no class at all — that is the pre-#print-theme behaviour,
-   kept for anyone who deliberately prints in their theme. */
+   kept for anyone who deliberately prints in their theme.
+
+   The light palette has neutral accents (#332 follow-up): bars and rules
+   dark gray, links blue, no beige code blocks. It matches the HTML export and
+   the image PDF, so every export looks like the same document. */
 #solomd-print-overlay.print-theme-light {
   --bg: #ffffff;
-  --bg-elev: #f7f6f3;
-  --bg-elevated: #f7f6f3;
+  --bg-elev: #f6f8fa;
+  --bg-elevated: #f6f8fa;
   --bg-hover: #f0eee8;
   --bg-active: #ebe9e2;
   --border: #e9e9e7;
   --text: #37352f;
   --text-muted: #787774;
   --text-faint: #b4b4b4;
-  --accent: #ff9f40;
+  --accent: #3d444d;
   --accent-fg: #1a1a1a;
   --danger: #d64545;
   --md-h1: #1a1a1a;
@@ -969,12 +973,12 @@ body.solomd-printing {
   --md-h6: #6a6a6a;
   --md-strong: #1a1a1a;
   --md-em: #444444;
-  --md-link: #b45f06;
-  --md-url: #c97a20;
-  --md-code: #c0392b;
-  --md-code-bg: #f3efe7;
+  --md-link: #0b5cad;
+  --md-url: #0b5cad;
+  --md-code: #1f2328;
+  --md-code-bg: #f6f8fa;
   --md-quote: #6a6a6a;
-  --md-list: #c97a20;
+  --md-list: #59636e;
   --md-hr: #c0bdb3;
   --syn-keyword: #a626a4;
   --syn-string: #50a14f;
