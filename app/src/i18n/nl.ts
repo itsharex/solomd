@@ -394,6 +394,7 @@ export const nl: I18n = {
       fontSize: 'Standaard lettergrootte',
       footer: 'Voettekst met paginanummer tonen',
       toc: 'Beginnen met een inhoudsopgave',
+      tocTitle: 'Inhoud',
       codeTheme: 'Codeblok-thema in PDF',
       codeThemePreview: 'Voorvertoning volgen',
       codeThemeLight: 'Altijd licht',

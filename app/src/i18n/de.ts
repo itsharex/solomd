@@ -394,6 +394,7 @@ export const de: I18n = {
       fontSize: 'Standard-Schriftgröße',
       footer: 'Seitenzahlen-Fußzeile anzeigen',
       toc: 'Mit einem Inhaltsverzeichnis beginnen',
+      tocTitle: 'Inhalt',
       codeTheme: 'Codeblock-Design im PDF',
       codeThemePreview: 'Wie Vorschau',
       codeThemeLight: 'Immer hell',

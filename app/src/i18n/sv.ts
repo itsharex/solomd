@@ -394,6 +394,7 @@ export const sv: I18n = {
       fontSize: 'Standardteckenstorlek',
       footer: 'Visa sidnummer i sidfot',
       toc: 'Börja med en innehållsförteckning',
+      tocTitle: 'Innehåll',
       codeTheme: 'Kodblockstema i PDF',
       codeThemePreview: 'Matcha förhandsgranskning',
       codeThemeLight: 'Alltid ljust',

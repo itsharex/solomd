@@ -396,6 +396,7 @@ export const zh: I18n = {
       fontSize: '默认字号',
       footer: '显示页码页脚',
       toc: '开头插入目录页',
+      tocTitle: '目录',
       codeTheme: 'PDF 中代码块主题',
       codeThemePreview: '与预览一致',
       codeThemeLight: '始终浅色',

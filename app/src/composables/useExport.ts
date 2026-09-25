@@ -25,6 +25,12 @@ const buildStandaloneHtml: typeof import('../lib/html-export')['buildStandaloneH
 import { exportDefaultPath } from '../lib/export-paths';
 import { useI18n } from '../i18n';
 import { mountPrintOverlay } from '../lib/print-overlay';
+import {
+  decoratePrintToc,
+  fillTocPageNumbers,
+  printableBox,
+  withPrintPagination,
+} from '../lib/print-pages';
 import { rewriteLinkUrls, rewriteImageUrls } from '../lib/image-resolve';
 import { useTabsStore } from '../stores/tabs';
 import { useSettingsStore } from '../stores/settings';
@@ -449,7 +455,7 @@ export function useExport() {
       buildPrintStyle(pdfOpts),
       isWindowsDesktop() ? buildWindowsPrintFrameStyle(pdfOpts) : '',
     ].filter(Boolean).join('\n');
-    const { content: printContent, cleanup } = mountPrintOverlay(
+    const { overlay: printOverlay, content: printContent, cleanup } = mountPrintOverlay(
       body,
       printTheme,
       printCss,
@@ -476,6 +482,26 @@ export function useExport() {
 
     // Give KaTeX / images a tick to apply layout before print.
     await new Promise((r) => setTimeout(r, 200));
+
+    // #347 — the TOC page gets a title, and page numbers when the page size is
+    // known (Settings → PDF or `pdf:` front matter). Measured after mermaid
+    // and the layout tick above, since both change where pages break.
+    if (pdfOpts.toc && printContent) {
+      try {
+        const nav = decoratePrintToc(printContent, t('settings.pdfDefaults.tocTitle'));
+        const box = printableBox(pdfOpts.pageSizeMm, pdfOpts.marginMm);
+        if (nav && box) {
+          withPrintPagination(printOverlay, printContent, box, (p) =>
+            fillTocPageNumbers(nav, printContent, p.pageOf),
+          );
+        } else if (nav) {
+          fillTocPageNumbers(nav, printContent, null);
+        }
+      } catch (e) {
+        // Numbers are a nicety; a failure here must never stop the print.
+        console.error('[print] toc page numbers failed', e);
+      }
+    }
     try {
       await invoke('print_webview');
       // The native print sheet is modal; by the time invoke resolves,

@@ -394,6 +394,7 @@ export const ja: I18n = {
       fontSize: 'デフォルトフォントサイズ',
       footer: 'ページ番号フッターを表示',
       toc: '先頭に目次ページを入れる',
+      tocTitle: '目次',
       codeTheme: 'PDF 内のコードブロックテーマ',
       codeThemePreview: 'プレビューに合わせる',
       codeThemeLight: '常にライト',

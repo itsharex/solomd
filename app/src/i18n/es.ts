@@ -394,6 +394,7 @@ export const es: I18n = {
       fontSize: 'Tamaño de fuente predeterminado',
       footer: 'Mostrar pie de página con número',
       toc: 'Empezar con una página de índice',
+      tocTitle: 'Índice',
       codeTheme: 'Tema del bloque de código en PDF',
       codeThemePreview: 'Igual que la vista previa',
       codeThemeLight: 'Siempre claro',

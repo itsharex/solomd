@@ -394,6 +394,7 @@ export const tr: I18n = {
       fontSize: 'Varsayılan yazı boyutu',
       footer: 'Sayfa numarası alt bilgisini göster',
       toc: 'İçindekiler sayfasıyla başla',
+      tocTitle: 'İçindekiler',
       codeTheme: 'PDF içindeki kod bloğu teması',
       codeThemePreview: 'Önizleme ile aynı',
       codeThemeLight: 'Her zaman açık',

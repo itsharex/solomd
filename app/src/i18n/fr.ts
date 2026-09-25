@@ -394,6 +394,7 @@ export const fr: I18n = {
       fontSize: 'Taille de police par défaut',
       footer: 'Afficher le pied de page avec numéros',
       toc: 'Commencer par une table des matières',
+      tocTitle: 'Sommaire',
       codeTheme: 'Thème des blocs de code dans le PDF',
       codeThemePreview: 'Comme l\'aperçu',
       codeThemeLight: 'Toujours clair',

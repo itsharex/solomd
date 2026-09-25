@@ -394,6 +394,7 @@ export const ko: I18n = {
       fontSize: '기본 글꼴 크기',
       footer: '페이지 번호 푸터 표시',
       toc: '맨 앞에 목차 페이지 넣기',
+      tocTitle: '목차',
       codeTheme: 'PDF 내 코드 블록 테마',
       codeThemePreview: '미리 보기와 동일',
       codeThemeLight: '항상 라이트',

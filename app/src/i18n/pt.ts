@@ -396,6 +396,7 @@ export const pt: I18n = {
       fontSize: 'Tamanho de fonte padrão',
       footer: 'Mostrar rodapé com número de página',
       toc: 'Começar com uma página de sumário',
+      tocTitle: 'Sumário',
       codeTheme: 'Tema de bloco de código no PDF',
       codeThemePreview: 'Igual à pré-visualização',
       codeThemeLight: 'Sempre claro',

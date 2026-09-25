@@ -395,6 +395,7 @@ export const en = {
       fontSize: 'Default font size',
       footer: 'Show page-number footer',
       toc: 'Start with a table of contents page',
+      tocTitle: 'Contents',
       codeTheme: 'Code-block theme in PDF',
       codeThemePreview: 'Match preview',
       codeThemeLight: 'Always light',

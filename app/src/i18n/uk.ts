@@ -394,6 +394,7 @@ export const uk: I18n = {
       fontSize: 'Типовий розмір шрифту',
       footer: 'Показувати нижній колонтитул із номером сторінки',
       toc: 'Почати зі сторінки змісту',
+      tocTitle: 'Зміст',
       codeTheme: 'Тема блоків коду в PDF',
       codeThemePreview: 'Як у перегляді',
       codeThemeLight: 'Завжди світла',

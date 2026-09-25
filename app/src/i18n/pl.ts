@@ -394,6 +394,7 @@ export const pl: I18n = {
       fontSize: 'Domyślny rozmiar czcionki',
       footer: 'Pokaż stopkę z numerem strony',
       toc: 'Zacznij od spisu treści',
+      tocTitle: 'Spis treści',
       codeTheme: 'Motyw bloku kodu w PDF',
       codeThemePreview: 'Dopasuj do podglądu',
       codeThemeLight: 'Zawsze jasny',

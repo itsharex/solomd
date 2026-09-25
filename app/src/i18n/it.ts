@@ -394,6 +394,7 @@ export const it: I18n = {
       fontSize: 'Dimensione carattere predefinita',
       footer: 'Mostra piè di pagina con numero',
       toc: 'Iniziare con un indice',
+      tocTitle: 'Indice',
       codeTheme: 'Tema blocco di codice nel PDF',
       codeThemePreview: 'Come l\'anteprima',
       codeThemeLight: 'Sempre chiaro',
