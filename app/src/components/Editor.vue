@@ -49,7 +49,8 @@ import { liveEditExtension, setLiveEditCopyLabel } from '../lib/cm-live-render';
 import { liveBlocksExtension, liveBlocksTheme, extractImageRoot } from '../lib/cm-live-blocks';
 import { findTldrawFences, replaceBoardSnapshot } from '../lib/tldraw-board';
 import { dragAwareExtension } from '../lib/cm-drag-aware';
-import { imagePasteExtension, insertImageFromPath as cmInsertImageFromPath, handleTextareaImagePaste, type ImagePasteOptions } from '../lib/cm-image-paste';
+import { imagePasteExtension, insertImageFromPath as cmInsertImageFromPath, imageTextFromPath, handleTextareaImagePaste, type ImagePasteOptions } from '../lib/cm-image-paste';
+import { markdownImage, encodeImageDestination } from '../lib/md-image-url';
 import { resolveUploader, uploadImage, type ImageUploadSettings } from '../lib/image-upload';
 import { focusModeExtension, typewriterModeExtension } from '../lib/cm-focus-mode';
 import { wikilinkExtension, wikilinkComplete } from '../lib/cm-wikilink';
@@ -3732,7 +3733,10 @@ function gotoLine(line: number) {
 
 async function insertImageFromPath(srcPath: string): Promise<void> {
   if (usePlainWindowsEditor) {
-    plainInsertText(srcPath);
+    // Was `plainInsertText(srcPath)`: a dropped image file landed as a bare
+    // path instead of an image link.
+    const text = await imageTextFromPath(srcPath, imagePasteOpts());
+    if (text) plainInsertText(text);
     return;
   }
   if (!view) return;
@@ -3745,11 +3749,11 @@ function insertImageUrl(url: string, alt = ''): void {
   const clean = (url || '').trim();
   if (!clean) return;
   if (usePlainWindowsEditor) {
-    plainInsertText(`![${alt}](${clean})`);
+    plainInsertText(markdownImage(clean, alt));
     return;
   }
   if (!view) return;
-  insertMarkdown(`![${alt}](${clean})`);
+  insertMarkdown(markdownImage(clean, alt));
 }
 
 /**
@@ -3810,7 +3814,9 @@ async function uploadLocalImages(): Promise<void> {
 async function resolveLocalImageAbsPath(src: string): Promise<string | null> {
   const { resolveImagePath } = await import('../lib/image-resolve');
   const imageRoot = parseFrontMatterImageRoot(props.tab.content) ?? null;
-  const abs = resolveImagePath(decodeURIComponent(src), imageRoot, props.tab.filePath);
+  // resolveImagePath decodes the src exactly once itself; decoding here too
+  // turned a file named `100%.png` (written as `100%25.png`) into garbage.
+  const abs = resolveImagePath(src, imageRoot, props.tab.filePath);
   return abs || null;
 }
 
@@ -3824,7 +3830,7 @@ function replaceAllImageSrc(oldSrc: string, newUrl: string): void {
   while (idx >= 0) {
     const from = idx + 2; // after `](`
     const to = idx + 2 + oldSrc.length;
-    changes.push({ from, to, insert: newUrl });
+    changes.push({ from, to, insert: encodeImageDestination(newUrl) });
     idx = doc.indexOf(needle, idx + needle.length);
   }
   if (changes.length) view.dispatch({ changes });

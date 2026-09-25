@@ -17,6 +17,7 @@ import { EditorView } from '@codemirror/view';
 import { invoke } from '@tauri-apps/api/core';
 import { tempDir, sep } from '@tauri-apps/api/path';
 import { uploadImage, type ResolvedUploader } from './image-upload';
+import { markdownImage } from './md-image-url';
 
 export interface ImagePasteOptions {
   getFilePath: () => string | undefined;
@@ -213,7 +214,7 @@ async function prepareLocalTarget(
   if (imageRoot && filePath) {
     const rootAbs = imageRoot.startsWith('/') || /^[a-zA-Z]:[\\/]/.test(imageRoot);
     const rootDir = rootAbs ? imageRoot : joinPath(dirnameOf(filePath, sepCh), imageRoot, sepCh);
-    return { fullPath: joinPath(rootDir, filename, sepCh), insertText: `![](${filename})` };
+    return { fullPath: joinPath(rootDir, filename, sepCh), insertText: markdownImage(filename) };
   }
   if (filePath) {
     const mode = opts.getAttachmentMode ? opts.getAttachmentMode() : 'shared';
@@ -222,14 +223,14 @@ async function prepareLocalTarget(
     const { dir: assetsDir, urlPrefix } = resolveAssetsDir(filePath, sepCh, mode, sharedDir, customPath);
     return {
       fullPath: joinPath(assetsDir, filename, sepCh),
-      insertText: `![](${urlPrefix}/${filename})`,
+      insertText: markdownImage(`${urlPrefix}/${filename}`),
     };
   }
   const t = await resolveTempDir(opts.tempDir);
   const fullPath = joinPath(joinPath(t, 'solomd', sepCh), filename, sepCh);
   // Forward slashes in the markdown URL — markdown-it eats `\` as escapes on
   // Windows, mangling the preview src. (No-op on macOS/Linux.)
-  return { fullPath, insertText: `![](${fullPath.replace(/\\/g, '/')})` };
+  return { fullPath, insertText: markdownImage(fullPath.replace(/\\/g, '/')) };
 }
 
 /** Temp path for an image we only need transiently (upload source when not
@@ -286,7 +287,7 @@ async function performUpload(
   try {
     const url = await uploadImage(up.cfg, srcPath);
     opts.notify?.('success', 'toast.imageUploaded');
-    return `![](${url})`;
+    return markdownImage(url);
   } catch (err) {
     console.error('[cm-image-paste] upload failed', err);
     opts.notify?.('error', 'toast.imageUploadFailed');
@@ -357,7 +358,7 @@ async function saveAndInsert(
       await invoke('copy_file', { src: srcPath, dst: local.fullPath });
       return local.insertText;
     } catch {
-      return `![](${srcPath.replace(/\\/g, '/')})`;
+      return markdownImage(srcPath.replace(/\\/g, '/'));
     }
   });
   replaceToken(view, token, finalText);
@@ -427,7 +428,7 @@ async function saveOrUploadText(
       await invoke('copy_file', { src: srcPath, dst: local.fullPath });
       return local.insertText;
     } catch {
-      return `![](${srcPath.replace(/\\/g, '/')})`;
+      return markdownImage(srcPath.replace(/\\/g, '/'));
     }
   });
 }
@@ -530,10 +531,47 @@ export async function insertImageFromPath(
       await invoke('copy_file', { src: srcPath, dst: local.fullPath });
       return local.insertText;
     } catch {
-      return `![](${srcPath.replace(/\\/g, '/')})`;
+      return markdownImage(srcPath.replace(/\\/g, '/'));
     }
   });
   replaceToken(view, token, finalText);
+}
+
+/**
+ * The markdown to insert for an image file on disk, for editors without a
+ * CodeMirror view (the Windows plain textarea editors). Copies the file into
+ * the attachments folder like {@link insertImageFromPath}, uploads it when an
+ * uploader is set to run on paste, and returns the link — or null if the copy
+ * failed. Before this existed, dropping an image file onto the Windows editor
+ * inserted the bare file path as text.
+ */
+export async function imageTextFromPath(
+  srcPath: string,
+  opts: ImagePasteOptions,
+): Promise<string | null> {
+  const ext = extFromName(srcPath) || 'png';
+  const filename = makeFilename(ext);
+  const up = opts.getUploader ? opts.getUploader(filename) : null;
+  const local = await prepareLocalTarget(filename, opts);
+  const copyLocal = async (): Promise<boolean> => {
+    try {
+      await invoke('copy_file', { src: srcPath, dst: local.fullPath });
+      return true;
+    } catch (err) {
+      console.error('[cm-image-paste] copy_file failed', err);
+      return false;
+    }
+  };
+  if (!up || !up.onPaste) return (await copyLocal()) ? local.insertText : null;
+  let uploadSrc = srcPath;
+  if (up.keepLocal) {
+    if (!(await copyLocal())) return null;
+    uploadSrc = local.fullPath;
+  }
+  return performUpload(up, uploadSrc, opts, async () => {
+    if (up.keepLocal) return local.insertText;
+    return (await copyLocal()) ? local.insertText : markdownImage(srcPath.replace(/\\/g, '/'));
+  });
 }
 
 export function imagePasteExtension(opts: ImagePasteOptions) {
