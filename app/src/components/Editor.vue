@@ -81,6 +81,9 @@ import { installSvgImageFallbacks, rewriteImageUrls } from '../lib/image-resolve
 import { SLASH_BLOCKS, filterBlocks, expandSnippet } from '../lib/slash-blocks';
 import { useWorkspaceIndexStore } from '../stores/workspaceIndex';
 import { isWindowsEditorRuntime, shouldUsePlainWindowsEditor } from '../lib/platform';
+import { isAndroid, isIOS } from '../lib/platform';
+import EditorContextMenu, { type EditorMenuAction } from './EditorContextMenu.vue';
+import { readText as readClipboardTextPlugin, writeText as writeClipboardTextPlugin } from '@tauri-apps/plugin-clipboard-manager';
 import { computeListContinuation } from '../lib/list-continuation';
 
 // Incremental find. CoreMirror's search panel only scrolls to a match when you
@@ -2592,6 +2595,126 @@ function enterPlainSelectAll() {
   });
 }
 
+// ── Editor right-click menu (#210) ─────────────────────────────────────────
+// The webview's own menu came up on Windows without Cut/Copy for a selection
+// the user had just made, so mouse-only users could select but not act. One
+// menu of our own, the same on every editor path. On phones a long-press
+// fires `contextmenu` too; the system selection menu is better there, so we
+// leave it alone.
+const editorCtx = ref<{ x: number; y: number; hasSelection: boolean } | null>(null);
+let ctxTextarea: HTMLTextAreaElement | null = null;
+let ctxSavedRange: { el: HTMLTextAreaElement; start: number; end: number } | null = null;
+
+/** Right mousedown: remember the textarea selection before anything can
+ *  collapse it (on WebView2 a textarea selection is mirrored into the page
+ *  selection, and page-selection cleanup used to wipe it on right-click). */
+function onEditorMouseDownCapture(event: MouseEvent) {
+  if (event.button !== 2) return;
+  const el = event.target;
+  if (el instanceof HTMLTextAreaElement) {
+    ctxSavedRange = { el, start: el.selectionStart ?? 0, end: el.selectionEnd ?? 0 };
+  } else {
+    ctxSavedRange = null;
+  }
+}
+
+function onEditorContextMenu(event: MouseEvent) {
+  const pointer = (event as PointerEvent).pointerType;
+  if (pointer === 'touch' || pointer === 'pen' || isAndroid() || isIOS()) return;
+  event.preventDefault();
+  let hasSelection = false;
+  if (!usePlainWindowsEditor) {
+    hasSelection = !!view && !view.state.selection.main.empty;
+    ctxTextarea = null;
+  } else {
+    const el = event.target instanceof HTMLTextAreaElement ? event.target : plainActiveTextarea();
+    ctxTextarea = el;
+    if (el && ctxSavedRange && ctxSavedRange.el === el
+      && ctxSavedRange.start !== ctxSavedRange.end
+      && el.selectionStart === el.selectionEnd) {
+      // Something collapsed the selection between mousedown and here; the
+      // user right-clicked a selection, so put it back.
+      el.setSelectionRange(ctxSavedRange.start, ctxSavedRange.end);
+    }
+    hasSelection = !!el && el.selectionStart !== el.selectionEnd;
+  }
+  ctxSavedRange = null;
+  editorCtx.value = { x: event.clientX, y: event.clientY, hasSelection };
+}
+
+async function writeClipboard(text: string) {
+  try {
+    await writeClipboardTextPlugin(text);
+  } catch {
+    await navigator.clipboard?.writeText(text);
+  }
+}
+async function readClipboard(): Promise<string> {
+  try {
+    return (await readClipboardTextPlugin()) ?? '';
+  } catch {
+    try {
+      return (await navigator.clipboard?.readText()) ?? '';
+    } catch {
+      return '';
+    }
+  }
+}
+
+async function onEditorMenuAction(id: EditorMenuAction) {
+  editorCtx.value = null;
+  if (!usePlainWindowsEditor) {
+    const v = view;
+    if (!v) return;
+    const sel = v.state.selection.main;
+    if (id === 'selectAll') {
+      v.dispatch({ selection: { anchor: 0, head: v.state.doc.length }, userEvent: 'select' });
+    } else if (id === 'copy' || id === 'cut') {
+      if (sel.empty) return;
+      await writeClipboard(v.state.sliceDoc(sel.from, sel.to));
+      if (id === 'cut') {
+        v.dispatch({ changes: { from: sel.from, to: sel.to, insert: '' }, userEvent: 'delete.cut' });
+      }
+    } else if (id === 'paste') {
+      const text = await readClipboard();
+      if (text) v.dispatch({ ...v.state.replaceSelection(text), userEvent: 'input.paste', scrollIntoView: true });
+    }
+    v.focus();
+    return;
+  }
+  const el = ctxTextarea ?? plainActiveTextarea();
+  ctxTextarea = null;
+  if (id === 'selectAll') {
+    if (plainLiveEnabled.value) {
+      enterPlainSelectAll();
+    } else if (el) {
+      el.focus();
+      el.select();
+      clearStrayDocumentSelection(el);
+      emitPlainCursorAndSelection();
+    }
+    return;
+  }
+  if (!el) return;
+  el.focus();
+  if (id === 'copy' || id === 'cut') {
+    const text = el.value.slice(el.selectionStart ?? 0, el.selectionEnd ?? 0);
+    if (!text) return;
+    await writeClipboard(text);
+    if (id === 'cut') {
+      el.focus();
+      // execCommand keeps the edit on the textarea's own undo stack and fires
+      // the input event our block/flat handlers listen to.
+      document.execCommand('delete');
+    }
+  } else if (id === 'paste') {
+    const text = await readClipboard();
+    if (!text) return;
+    el.focus();
+    document.execCommand('insertText', false, text);
+  }
+}
+
 /**
  * Leave select-all mode once the selection collapses (click / arrow key / Esc):
  * re-split into blocks and land the caret in the block that now contains it.
@@ -4013,8 +4136,18 @@ const cls = computed(() => ({
 </script>
 
 <template>
-  <div v-if="!usePlainWindowsEditor" :class="cls" ref="host"></div>
-  <div v-else class="plain-host">
+  <div
+    v-if="!usePlainWindowsEditor"
+    :class="cls"
+    ref="host"
+    @contextmenu="onEditorContextMenu"
+  ></div>
+  <div
+    v-else
+    class="plain-host"
+    @mousedown.capture="onEditorMouseDownCapture"
+    @contextmenu="onEditorContextMenu"
+  >
     <div
       v-if="plainLiveEnabled"
       ref="plainLiveHost"
@@ -4136,7 +4269,7 @@ const cls = computed(() => ({
         @paste="handlePlainPaste"
         @input="handlePlainInput"
         @scroll="onPlainScroll"
-        @mousedown="clearStrayDocumentSelection($event.currentTarget as HTMLElement)"
+        @mousedown="$event.button === 0 && clearStrayDocumentSelection($event.currentTarget as HTMLElement)"
         @blur="schedulePlainOverlays"
         @keyup="emitPlainCursorAndSelection"
         @mouseup="emitPlainCursorAndSelection"
@@ -4244,6 +4377,16 @@ const cls = computed(() => ({
       </li>
     </ul>
   </div>
+  <Teleport to="body">
+    <EditorContextMenu
+      v-if="editorCtx"
+      :x="editorCtx.x"
+      :y="editorCtx.y"
+      :has-selection="editorCtx.hasSelection"
+      @action="onEditorMenuAction"
+      @close="editorCtx = null"
+    />
+  </Teleport>
 </template>
 
 <style scoped>
