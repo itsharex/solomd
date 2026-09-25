@@ -1218,6 +1218,8 @@ export const nl: I18n = {
   },
   reading: {
     exit: 'Leesmodus verlaten',
+    toEdit: "Naar bewerkmodus",
+    toEditTooltip: "Naar bewerkmodus (Esc)",
     exitTooltip: 'Leesmodus verlaten (Esc)',
     empty: 'Geen document geopend.',
     settingHeading: 'Leesmodus',

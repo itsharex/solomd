@@ -1218,6 +1218,8 @@ export const uk: I18n = {
   },
   reading: {
     exit: 'Вийти з режиму читання',
+    toEdit: "Перейти до режиму редагування",
+    toEditTooltip: "Перейти до режиму редагування (Esc)",
     exitTooltip: 'Вийти з режиму читання (Esc)',
     empty: 'Немає відкритих документів.',
     settingHeading: 'Режим читання',

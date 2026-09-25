@@ -1215,6 +1215,8 @@ export const de: I18n = {
   },
   reading: {
     exit: 'Lesemodus verlassen',
+    toEdit: "Zum Bearbeitungsmodus wechseln",
+    toEditTooltip: "Zum Bearbeitungsmodus wechseln (Esc)",
     exitTooltip: 'Lesemodus verlassen (Esc)',
     empty: 'Kein Dokument geöffnet.',
     settingHeading: 'Lesemodus',

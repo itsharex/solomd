@@ -1218,6 +1218,8 @@ export const sv: I18n = {
   },
   reading: {
     exit: 'Avsluta läsläge',
+    toEdit: "Växla till redigeringsläge",
+    toEditTooltip: "Växla till redigeringsläge (Esc)",
     exitTooltip: 'Avsluta läsläge (Esc)',
     empty: 'Inget dokument är öppnat.',
     settingHeading: 'Läsläge',

@@ -1222,6 +1222,8 @@ export const en = {
   },
   reading: {
     exit: 'Exit reading mode',
+    toEdit: "Switch to edit mode",
+    toEditTooltip: "Switch to edit mode (Esc)",
     exitTooltip: 'Exit reading mode (Esc)',
     empty: 'No document is open.',
     settingHeading: 'Reading mode',

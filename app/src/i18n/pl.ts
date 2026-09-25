@@ -1218,6 +1218,8 @@ export const pl: I18n = {
   },
   reading: {
     exit: 'Wyjdź z trybu czytania',
+    toEdit: "Przełącz na tryb edycji",
+    toEditTooltip: "Przełącz na tryb edycji (Esc)",
     exitTooltip: 'Wyjdź z trybu czytania (Esc)',
     empty: 'Żaden dokument nie jest otwarty.',
     settingHeading: 'Tryb czytania',

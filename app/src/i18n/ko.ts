@@ -1215,6 +1215,8 @@ export const ko: I18n = {
   },
   reading: {
     exit: '읽기 모드 종료',
+    toEdit: "편집 모드로 전환",
+    toEditTooltip: "편집 모드로 전환 (Esc)",
     exitTooltip: '읽기 모드 종료(Esc)',
     empty: '열린 문서가 없습니다.',
     settingHeading: '읽기 모드',

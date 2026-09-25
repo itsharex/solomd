@@ -1218,6 +1218,8 @@ export const tr: I18n = {
   },
   reading: {
     exit: 'Okuma modundan çık',
+    toEdit: "Düzenleme moduna geç",
+    toEditTooltip: "Düzenleme moduna geç (Esc)",
     exitTooltip: 'Okuma modundan çık (Esc)',
     empty: 'Açık belge yok.',
     settingHeading: 'Okuma modu',

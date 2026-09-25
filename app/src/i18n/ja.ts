@@ -1215,6 +1215,8 @@ export const ja: I18n = {
   },
   reading: {
     exit: '読書モードを終了',
+    toEdit: "編集モードに切り替え",
+    toEditTooltip: "編集モードに切り替え (Esc)",
     exitTooltip: '読書モードを終了 (Esc)',
     empty: 'ドキュメントが開かれていません。',
     settingHeading: '読書モード',

@@ -1213,6 +1213,8 @@ export const zh: I18n = {
   },
   reading: {
     exit: '退出阅读模式',
+    toEdit: "切换到编辑模式",
+    toEditTooltip: "切换到编辑模式 (Esc)",
     exitTooltip: '退出阅读模式 (Esc)',
     empty: '当前没有打开文档。',
     settingHeading: '阅读模式',

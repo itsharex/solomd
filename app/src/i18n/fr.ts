@@ -1215,6 +1215,8 @@ export const fr: I18n = {
   },
   reading: {
     exit: 'Quitter le mode lecture',
+    toEdit: "Passer en mode édition",
+    toEditTooltip: "Passer en mode édition (Échap)",
     exitTooltip: 'Quitter le mode lecture (Esc)',
     empty: 'Aucun document ouvert.',
     settingHeading: 'Mode lecture',
