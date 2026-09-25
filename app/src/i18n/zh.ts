@@ -245,6 +245,9 @@ export const zh: I18n = {
     saved: '已保存',
   },
   settings: {
+    searchPlaceholder: "搜索设置（⌘/Ctrl+F）",
+    searchCount: "{n} 项匹配",
+    searchEmpty: "没有与“{q}”匹配的设置。",
     title: '设置',
     catBasics: '基础',
     catWriting: '写作',

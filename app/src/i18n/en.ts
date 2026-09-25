@@ -244,6 +244,9 @@ export const en = {
     saved: 'Saved',
   },
   settings: {
+    searchPlaceholder: "Search settings (⌘/Ctrl+F)",
+    searchCount: "{n} matches",
+    searchEmpty: "No settings match “{q}”.",
     title: 'Settings',
     catBasics: 'Basics',
     catWriting: 'Writing',

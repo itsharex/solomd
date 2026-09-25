@@ -243,6 +243,9 @@ export const ja: I18n = {
     saved: '保存済み',
   },
   settings: {
+    searchPlaceholder: "設定を検索（⌘/Ctrl+F）",
+    searchCount: "{n} 件",
+    searchEmpty: "「{q}」に一致する設定はありません。",
     title: '設定',
     catBasics: '基本',
     catWriting: '執筆',

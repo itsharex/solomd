@@ -243,6 +243,9 @@ export const es: I18n = {
     saved: 'Guardado',
   },
   settings: {
+    searchPlaceholder: "Buscar en los ajustes (⌘/Ctrl+F)",
+    searchCount: "{n} coincidencias",
+    searchEmpty: "Ningún ajuste coincide con «{q}».",
     title: 'Ajustes',
     catBasics: 'General',
     catWriting: 'Escritura',

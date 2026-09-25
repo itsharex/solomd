@@ -243,6 +243,9 @@ export const sv: I18n = {
     saved: 'Sparad',
   },
   settings: {
+    searchPlaceholder: "Sök i inställningar (⌘/Ctrl+F)",
+    searchCount: "{n} träffar",
+    searchEmpty: "Ingen inställning matchar ”{q}”.",
     title: 'Inställningar',
     catBasics: 'Grunder',
     catWriting: 'Skrivande',

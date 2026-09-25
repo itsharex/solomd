@@ -243,6 +243,9 @@ export const tr: I18n = {
     saved: 'Kaydedildi',
   },
   settings: {
+    searchPlaceholder: "Ayarlarda ara (⌘/Ctrl+F)",
+    searchCount: "{n} sonuç",
+    searchEmpty: "“{q}” ile eşleşen ayar yok.",
     title: 'Ayarlar',
     catBasics: 'Temel',
     catWriting: 'Yazma',

@@ -243,6 +243,9 @@ export const it: I18n = {
     saved: 'Salvato',
   },
   settings: {
+    searchPlaceholder: "Cerca nelle impostazioni (⌘/Ctrl+F)",
+    searchCount: "{n} risultati",
+    searchEmpty: "Nessuna impostazione corrisponde a «{q}».",
     title: 'Impostazioni',
     catBasics: 'Generali',
     catWriting: 'Scrittura',

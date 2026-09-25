@@ -23,6 +23,12 @@ import { uk } from './uk';
 const dicts = { en, zh, ja, ko, de, fr, es, pt, it, pl, nl, tr, sv, uk } as const;
 type Lang = keyof typeof dicts;
 
+/** The raw dictionaries, for features that search translations (#352 settings
+ *  search looks an English keyword up in `en` and matches the translation). */
+export function getDict(lang: string): unknown {
+  return dicts[lang as Lang] || en;
+}
+
 export function useI18n() {
   const settings = useSettingsStore();
   const dict = computed(() => dicts[settings.language as Lang] || en);

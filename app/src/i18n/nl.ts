@@ -243,6 +243,9 @@ export const nl: I18n = {
     saved: 'Opgeslagen',
   },
   settings: {
+    searchPlaceholder: "Instellingen zoeken (⌘/Ctrl+F)",
+    searchCount: "{n} resultaten",
+    searchEmpty: "Geen instelling komt overeen met ‘{q}’.",
     title: 'Instellingen',
     catBasics: 'Basis',
     catWriting: 'Schrijven',

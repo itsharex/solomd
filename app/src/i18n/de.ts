@@ -243,6 +243,9 @@ export const de: I18n = {
     saved: 'Gespeichert',
   },
   settings: {
+    searchPlaceholder: "Einstellungen durchsuchen (⌘/Strg+F)",
+    searchCount: "{n} Treffer",
+    searchEmpty: "Keine Einstellung passt zu „{q}“.",
     title: 'Einstellungen',
     catBasics: 'Allgemein',
     catWriting: 'Schreiben',

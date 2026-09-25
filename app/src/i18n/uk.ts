@@ -243,6 +243,9 @@ export const uk: I18n = {
     saved: 'Збережено',
   },
   settings: {
+    searchPlaceholder: "Пошук у налаштуваннях (⌘/Ctrl+F)",
+    searchCount: "Збігів: {n}",
+    searchEmpty: "Жодне налаштування не відповідає «{q}».",
     title: 'Налаштування',
     catBasics: 'Основні',
     catWriting: 'Письмо',

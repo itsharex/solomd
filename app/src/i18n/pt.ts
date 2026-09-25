@@ -245,6 +245,9 @@ export const pt: I18n = {
     saved: 'Salvo',
   },
   settings: {
+    searchPlaceholder: "Pesquisar ajustes (⌘/Ctrl+F)",
+    searchCount: "{n} resultados",
+    searchEmpty: "Nenhum ajuste corresponde a “{q}”.",
     title: 'Configurações',
     catBasics: 'Geral',
     catWriting: 'Escrita',

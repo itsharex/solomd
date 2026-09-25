@@ -243,6 +243,9 @@ export const ko: I18n = {
     saved: '저장됨',
   },
   settings: {
+    searchPlaceholder: "설정 검색 (⌘/Ctrl+F)",
+    searchCount: "{n}개 일치",
+    searchEmpty: "“{q}”와 일치하는 설정이 없습니다.",
     title: '설정',
     catBasics: '기본',
     catWriting: '쓰기',

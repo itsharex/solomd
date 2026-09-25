@@ -243,6 +243,9 @@ export const fr: I18n = {
     saved: 'Enregistré',
   },
   settings: {
+    searchPlaceholder: "Rechercher dans les réglages (⌘/Ctrl+F)",
+    searchCount: "{n} résultats",
+    searchEmpty: "Aucun réglage ne correspond à « {q} ».",
     title: 'Paramètres',
     catBasics: 'Général',
     catWriting: 'Écriture',
