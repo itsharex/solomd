@@ -76,6 +76,11 @@ interface Settings {
   // Editor super features
   spellCheck: boolean;
   focusMode: boolean;
+  /** #346: hide the toolbar's buttons for a distraction-free, keyboard-only
+   *  setup. The window strip (drag area, file name, window controls and the
+   *  Windows menubar) stays. Where the OS draws the title bar, the whole
+   *  toolbar goes. */
+  toolbarHidden: boolean;
   typewriterMode: boolean;
   /** One-time tips when Markdown formatting is typed by hand (useFormatHints). */
   formatHints: boolean;
@@ -544,6 +549,7 @@ function defaults(): Settings {
     livePreview: true,
     spellCheck: true,
     focusMode: false,
+    toolbarHidden: false,
     typewriterMode: false,
     formatHints: true,
     formatHintsSeen: [],
@@ -1027,6 +1033,10 @@ export const useSettingsStore = defineStore('settings', {
     },
     toggleFocusMode() {
       this.focusMode = !this.focusMode;
+      this.persist();
+    },
+    toggleToolbarHidden() {
+      this.toolbarHidden = !this.toolbarHidden;
       this.persist();
     },
     toggleFormatHints() {

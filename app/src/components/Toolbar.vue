@@ -669,6 +669,10 @@ onBeforeUnmount(() => {
       'toolbar--win': winTitleBar,
       'toolbar--phone-open': isNarrow && sheetOpen,
       'toolbar--sheet': sheetOpen,
+      // #346 — keyboard users can drop the buttons. Ignored on a phone:
+      // with no keyboard, the ⋯ sheet is the only way back to Settings.
+      'toolbar--minimal': settings.toolbarHidden && !isNarrow,
+      'toolbar--gone': settings.toolbarHidden && !isNarrow && !macTitleBar && !winTitleBar,
     }"
     @mousedown.capture="onTitleBarMouseDown"
     @dblclick="onTitleBarDblClick"
@@ -1214,6 +1218,21 @@ onBeforeUnmount(() => {
    caption buttons render flush against the top-right corner (no padding). */
 .toolbar--win {
   padding-right: 0;
+}
+/* #346 — "hide toolbar buttons". On macOS and Windows this row is also the
+   window's title bar (traffic lights / caption buttons, drag area, menubar), so
+   only the buttons go. Elsewhere the OS draws the title bar and the row can
+   go entirely. */
+.toolbar--minimal > .toolbar__group,
+.toolbar--minimal > .toolbar__divider,
+.toolbar--minimal > .toolbar__more {
+  display: none;
+}
+.toolbar--minimal .toolbar__title {
+  margin: 0 auto;
+}
+.toolbar--gone {
+  display: none;
 }
 .menubar {
   display: flex;

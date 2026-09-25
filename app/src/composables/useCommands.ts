@@ -226,6 +226,7 @@ export function useCommands(): Command[] {
     { id: 'view.toggleLivePreview', title: 'View: Toggle Live Preview / Raw Source (Markdown)', run: () => settings.toggleLivePreview() },
     { id: 'view.toggleSpellCheck', title: 'View: Toggle Spell Check', run: () => settings.toggleSpellCheck() },
     { id: 'view.toggleFocusMode', title: 'View: Toggle Focus Mode', run: () => settings.toggleFocusMode() },
+    { id: 'view.toggleToolbar', title: 'View: Show / Hide Toolbar Buttons', shortcut: kb('view.toggleToolbar'), run: () => settings.toggleToolbarHidden() },
     { id: 'view.toggleTypewriter', title: 'View: Toggle Typewriter Mode', run: () => settings.toggleTypewriterMode() },
 
     // ---- Tile layout ----

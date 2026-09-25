@@ -119,6 +119,7 @@ export function useShortcuts(hooks: Hooks = {}) {
     'view.toggleRightSidebar': () => settings.toggleRightSidebar(),
     'view.toggleOutline': () => runById('view.toggleOutline'),
     'view.toggleInspector': () => settings.toggleInspector(),
+    'view.toggleToolbar': () => settings.toggleToolbarHidden(),
     'view.slideshow': () => runById('view.slideshow'),
     'fold.toggle': () => runById('fold.toggle'),
     'fold.all': () => runById('fold.all'),

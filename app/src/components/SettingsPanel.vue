@@ -1599,6 +1599,11 @@ function onSelectPdfFont(v: string) {
             <input type="checkbox" :checked="settings.focusMode" @change="settings.toggleFocusMode()" />
             {{ t('settings.focusMode') }}
           </label>
+          <label>
+            <input type="checkbox" :checked="settings.toolbarHidden" @change="settings.toggleToolbarHidden()" />
+            {{ t('settings.toolbarHidden') }}
+          </label>
+          <p class="setting-hint">{{ withChord('settings.toolbarHiddenHint', 'view.toggleToolbar') }}</p>
         </section>
 
         <section data-cat="writing">

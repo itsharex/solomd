@@ -133,6 +133,7 @@ export const KEY_ACTIONS: KeyActionDef[] = [
   { id: 'view.toggleRightSidebar', label: 'Toggle Right Sidebar', category: 'view', defaults: ['Mod+Alt+B'] },
   { id: 'view.toggleOutline', label: 'Toggle Outline', category: 'view', defaults: ['Mod+Shift+O'] },
   { id: 'view.toggleInspector', label: 'Toggle Properties Inspector', category: 'view', defaults: ['Mod+Shift+I'] },
+  { id: 'view.toggleToolbar', label: 'Show / Hide Toolbar Buttons', category: 'view', defaults: ['Mod+Alt+Shift+T'] },
   { id: 'view.slideshow', label: 'Slideshow', category: 'view', defaults: ['Mod+Alt+P'] },
   // Folding. The chords mirror CodeMirror's own fold keymap so the muscle
   // memory carries over — but they are handled at app level, which is what
