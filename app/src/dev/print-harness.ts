@@ -11,7 +11,9 @@
  *   - a table split across pages repeats its header row on the next page.
  *
  * Query params: `?rows=N` table length (default 120), `?pdf=a4` to apply a
- * user-touched A4 page setup instead of the webview default.
+ * user-touched A4 page setup instead of the webview default, `?win=1` to add
+ * the Windows header/footer-suppressing page frame, `?toc=1` for the
+ * table-of-contents page (#347).
  * `window.__printHarness` reports the overlay's height when ready.
  */
 import '../styles/cjk-font.css';
@@ -22,7 +24,12 @@ import 'katex/dist/katex.min.css';
 // overlay uses; importing the SFC is what injects it, as it does in the app.
 import '../components/Preview.vue';
 import { renderMarkdown } from '../lib/markdown';
-import { buildPrintStyle, resolvePdfOptions } from '../lib/pdf-options';
+import {
+  buildPrintStyle,
+  buildWindowsPrintFrameStyle,
+  resolvePdfOptions,
+  withPdfToc,
+} from '../lib/pdf-options';
 import { defaultPdfDefaults } from '../stores/settings';
 import { mountPrintOverlay } from '../lib/print-overlay';
 
@@ -47,9 +54,13 @@ function fixture(): string {
   return parts.join('\n');
 }
 
-const source = fixture();
-const opts = resolvePdfOptions(defaultPdfDefaults(), source, params.get('pdf') === 'a4');
-const mounted = mountPrintOverlay(renderMarkdown(source), 'light', buildPrintStyle(opts));
+const opts = resolvePdfOptions(defaultPdfDefaults(), fixture(), params.get('pdf') === 'a4');
+const source = params.get('toc') === '1' ? withPdfToc(fixture()) : fixture();
+const css = [
+  buildPrintStyle(opts),
+  params.get('win') === '1' ? buildWindowsPrintFrameStyle(opts) : '',
+].filter(Boolean).join('\n');
+const mounted = mountPrintOverlay(renderMarkdown(source), 'light', css);
 
 (window as any).__printHarness = {
   ready: true,

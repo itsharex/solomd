@@ -4,7 +4,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { writeText, writeHtml, writeImage } from '@tauri-apps/plugin-clipboard-manager';
 import { Image } from '@tauri-apps/api/image';
 import { documentDir, join } from '@tauri-apps/api/path';
-import { isIOS } from '../lib/platform';
+import { isIOS, isWindowsDesktop } from '../lib/platform';
 // Loaded per export rather than at startup. Between them these three pull in
 // `docx`, jsPDF + html2canvas and the mermaid renderer — megabytes that a user
 // who only opens a note to read it should never have to compile.
@@ -34,6 +34,8 @@ import {
   resolvePdfOptions,
   userTouchedPdfDefaults,
   buildPrintStyle,
+  buildWindowsPrintFrameStyle,
+  withPdfToc,
 } from '../lib/pdf-options';
 
 /** Strip Markdown syntax to produce plain prose. */
@@ -415,7 +417,14 @@ export function useExport() {
 
     // Strip YAML front matter before rendering — users don't want the
     // metadata block to show up in the printed output.
-    const source = ctx.content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
+    const pdfOpts = resolvePdfOptions(
+      settings.pdfDefaults,
+      ctx.content,
+      userTouchedPdfDefaults(settings.pdfDefaults),
+    );
+    const stripped = ctx.content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
+    // #347 — optional table-of-contents page (Settings → PDF, or `pdf: toc: true`).
+    const source = pdfOpts.toc ? withPdfToc(stripped) : stripped;
     // v4.3.0 issue #77 — same link/image rewriting as the file-export path,
     // so the print overlay (and therefore the resulting PDF from the system
     // print dialog) doesn't show `http://tauri.localhost/...` links.
@@ -434,15 +443,16 @@ export function useExport() {
     // When the user has never touched Settings AND the doc has no
     // `pdf:` block, `buildPrintStyle` returns "" and we mirror
     // pre-v2.5 webview-default behavior.
-    const pdfOpts = resolvePdfOptions(
-      settings.pdfDefaults,
-      ctx.content,
-      userTouchedPdfDefaults(settings.pdfDefaults),
-    );
+    // #347 — on Windows, move the page margins into the overlay so Chromium's
+    // print headers/footers (date, title, URL) have nowhere to draw.
+    const printCss = [
+      buildPrintStyle(pdfOpts),
+      isWindowsDesktop() ? buildWindowsPrintFrameStyle(pdfOpts) : '',
+    ].filter(Boolean).join('\n');
     const { content: printContent, cleanup } = mountPrintOverlay(
       body,
       printTheme,
-      buildPrintStyle(pdfOpts),
+      printCss,
     );
 
     // #301 — swap mermaid fences for SVGs and WAIT for them. This has to

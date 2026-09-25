@@ -461,6 +461,8 @@ export interface PdfDefaults {
   footer: boolean;
   /** Code-block syntax highlighting in PDF: match preview / always light / always dark. */
   codeTheme: 'preview' | 'light' | 'dark';
+  /** #347 — start the text PDF with a table-of-contents page. */
+  toc: boolean;
 }
 
 export function defaultPdfDefaults(): PdfDefaults {
@@ -477,6 +479,7 @@ export function defaultPdfDefaults(): PdfDefaults {
     fontSize: 11,
     footer: true,
     codeTheme: 'preview',
+    toc: false,
   };
 }
 
@@ -715,6 +718,7 @@ function mergePdfDefaults(saved: unknown): PdfDefaults {
     fontSize: clamp(s.fontSize, 9, 16, base.fontSize),
     footer: typeof s.footer === 'boolean' ? s.footer : base.footer,
     codeTheme: okCodeTheme.includes(s.codeTheme as never) ? (s.codeTheme as PdfDefaults['codeTheme']) : base.codeTheme,
+    toc: typeof s.toc === 'boolean' ? s.toc : base.toc,
   };
 }
 

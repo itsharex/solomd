@@ -1236,6 +1236,17 @@ function onSelectPdfFont(v: string) {
         </section>
 
         <section data-cat="export">
+          <label>
+            <input
+              type="checkbox"
+              :checked="settings.pdfDefaults.toc"
+              @change="settings.setPdfDefaults({ toc: ($event.target as HTMLInputElement).checked })"
+            />
+            {{ t('settings.pdfDefaults.toc') }}
+          </label>
+        </section>
+
+        <section data-cat="export">
           <label>{{ t('settings.pdfDefaults.codeTheme') }}</label>
           <select
             :value="settings.pdfDefaults.codeTheme"

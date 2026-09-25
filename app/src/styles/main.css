@@ -924,6 +924,12 @@ mark {
     break-inside: avoid-page;
     background: transparent;
   }
+  /* #347 — a TOC at the top of the document (Settings → PDF "table of
+   * contents", or a leading [TOC]) is a page of its own. */
+  body.solomd-printing .solomd-print-content > .md-toc:first-child {
+    break-after: page;
+    page-break-after: always;
+  }
 }
 /* On-screen the overlay must be invisible — @media print flips it. */
 #solomd-print-overlay {
