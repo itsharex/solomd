@@ -35,12 +35,24 @@ import {
   canDropInto,
   baseName,
   sepOf,
+  reorderTarget,
+  parentDir,
 } from '../composables/useTreeDrag';
+import {
+  sortEntries,
+  sortNeedsTimes,
+  reorderedNames,
+  renameInOrder,
+  TREE_SORT_MODES,
+  type TreeSortMode,
+} from '../lib/tree-sort';
 
 interface Entry {
   name: string;
   path: string;
   is_dir: boolean;
+  modified?: number;
+  created?: number;
 }
 interface Node extends Entry {
   expanded?: boolean;
@@ -201,6 +213,94 @@ function hiddenInTree(e: { name: string; is_dir: boolean }): boolean {
   return e.name.startsWith('.') || (e.is_dir && isAttachmentDir(e.name));
 }
 
+// ---------------------------------------------------------------------------
+// #342 — sort order. One mode per workspace (settings.explorerSortByFolder);
+// "manual" keeps a per-folder name list in <vault>/.solomd/order.json, which
+// is written only once the user actually drags something into place — the
+// file is not created just by opening a vault (see #236).
+// ---------------------------------------------------------------------------
+const sortMode = computed<TreeSortMode>(
+  () => (workspace.currentFolder && settings.explorerSortByFolder[workspace.currentFolder]) || 'name-asc',
+);
+const sortOpen = ref(false);
+/** Folder path relative to the vault root ('' = root) → child names in order. */
+const manualOrder = ref<Record<string, string[]>>({});
+
+function orderKey(folder: string): string {
+  return folder === workspace.currentFolder ? '' : rootRelative(folder);
+}
+function orderPath(): string | null {
+  const rootPath = workspace.currentFolder;
+  if (!rootPath || isSafPath(rootPath)) return null;
+  return joinPath(joinPath(rootPath, '.solomd'), 'order.json');
+}
+async function loadManualOrder() {
+  manualOrder.value = {};
+  const path = orderPath();
+  if (!path) return;
+  try {
+    const fr = await invoke<{ content: string }>('read_file', { path });
+    const parsed = JSON.parse(fr.content);
+    if (parsed && typeof parsed === 'object') {
+      const clean: Record<string, string[]> = {};
+      for (const [k, v] of Object.entries(parsed)) {
+        if (Array.isArray(v)) clean[k] = v.filter((x) => typeof x === 'string');
+      }
+      manualOrder.value = clean;
+    }
+  } catch {
+    /* no order file yet — every folder falls back to creation order */
+  }
+}
+async function saveManualOrder() {
+  const path = orderPath();
+  if (!path) return;
+  try {
+    await invoke('fs_create_dir', { path: path.replace(/[\\/][^\\/]+$/, '') }).catch(() => {});
+    await invoke('write_file', {
+      path,
+      content: JSON.stringify(manualOrder.value, null, 2) + '\n',
+      encoding: 'UTF-8',
+    });
+  } catch (err) {
+    toasts.error(String(err));
+  }
+}
+function sortChildren<T extends Entry>(folder: string, children: T[]): T[] {
+  return sortEntries(children, sortMode.value, manualOrder.value[orderKey(folder)] ?? []);
+}
+/** Re-apply the current order to everything already loaded (no re-listing). */
+function resortLoaded() {
+  function walk(n: Node | null | undefined) {
+    if (!n || !n.children) return;
+    n.children = sortChildren(n.path, n.children);
+    n.children.forEach(walk);
+  }
+  walk(root.value);
+}
+function setSortMode(mode: TreeSortMode) {
+  sortOpen.value = false;
+  const folder = workspace.currentFolder;
+  if (!folder) return;
+  const hadTimes = sortNeedsTimes(sortMode.value);
+  settings.setExplorerSort(folder, mode);
+  // Date and manual modes need timestamps the plain listing doesn't carry,
+  // so switching into one re-lists; otherwise re-sorting in place is enough.
+  if (sortNeedsTimes(mode) && !hadTimes) void refreshTreePreservingExpansion();
+  else resortLoaded();
+}
+function sortLabel(mode: TreeSortMode): string {
+  const key = {
+    'name-asc': 'explorer.sortNameAsc',
+    'name-desc': 'explorer.sortNameDesc',
+    'created-asc': 'explorer.sortCreatedAsc',
+    'created-desc': 'explorer.sortCreatedDesc',
+    'modified-desc': 'explorer.sortModifiedDesc',
+    manual: 'explorer.sortManual',
+  }[mode];
+  return t(key);
+}
+
 async function loadDir(path: string): Promise<{ children: Node[]; truncated: boolean }> {
   try {
     // #148 — SAF vault: list children via ContentResolver, not std::fs.
@@ -212,8 +312,9 @@ async function loadDir(path: string): Promise<{ children: Node[]; truncated: boo
       // lister, so the setting means the same thing on a SAF vault as on a
       // plain folder.
       return {
-        children: (safChildren as Node[]).filter(
-          (c) => !isDeletePending(c.path) && !hiddenInTree(c),
+        children: sortChildren(
+          path,
+          (safChildren as Node[]).filter((c) => !isDeletePending(c.path) && !hiddenInTree(c)),
         ),
         truncated: false,
       };
@@ -221,6 +322,7 @@ async function loadDir(path: string): Promise<{ children: Node[]; truncated: boo
     const entries = await invoke<Entry[]>('list_dir', {
       path,
       showHidden: settings.explorerShowHidden,
+      withTimes: sortNeedsTimes(sortMode.value),
     });
     let truncated = false;
     const filtered: Node[] = [];
@@ -237,7 +339,7 @@ async function loadDir(path: string): Promise<{ children: Node[]; truncated: boo
     // folder back (or reconnecting the drive) recovers on the next refresh
     // rather than needing the workspace re-picked.
     if (path === workspace.currentFolder) rootMissing.value = false;
-    return { children: filtered, truncated };
+    return { children: sortChildren(path, filtered), truncated };
   } catch (e) {
     console.error('list_dir failed', e);
     // Only the root's disappearance is worth a special state; a subfolder that
@@ -326,7 +428,7 @@ watch(
     // Same for the selection: a save dialog aimed at the previous vault's
     // folder is the trap this whole selection exists to avoid.
     selected.value = null;
-    void refreshRoot();
+    void loadManualOrder().then(refreshRoot);
   },
   { immediate: true },
 );
@@ -380,7 +482,13 @@ async function refreshFilterDirs() {
   }
 }
 
+function toggleSortMenu() {
+  sortOpen.value = !sortOpen.value;
+  filterOpen.value = false;
+}
+
 async function openFilter() {
+  sortOpen.value = false;
   filterOpen.value = !filterOpen.value;
   if (!filterOpen.value) return;
   const rootPath = workspace.currentFolder;
@@ -981,6 +1089,46 @@ watch(
   { immediate: true },
 );
 
+/** #342 — in manual mode, the top or bottom edge of a sibling row of the
+ *  same kind (folder among folders, file among files) means "put it here".
+ *  A folder's middle band still means "move into it", so both gestures stay
+ *  available; a file row is split in half, since dropping into a file isn't
+ *  a thing. Anything else returns null and falls through to the move logic. */
+function reorderAt(
+  x: number,
+  y: number,
+  from: string,
+  fromIsDir: boolean,
+): { path: string; pos: 'before' | 'after' } | null {
+  if (sortMode.value !== 'manual') return null;
+  const el = document.elementFromPoint(x, y) as HTMLElement | null;
+  const row = el?.closest('.ftree__item') as HTMLElement | null;
+  const target = row?.dataset.path;
+  if (!row || !target || target === from) return null;
+  const rowIsDir = row.dataset.dir === '1';
+  if (rowIsDir !== fromIsDir) return null;
+  if (parentDir(target) !== parentDir(from)) return null;
+  const r = row.getBoundingClientRect();
+  const frac = (y - r.top) / Math.max(1, r.height);
+  if (rowIsDir) {
+    if (frac < 0.25) return { path: target, pos: 'before' };
+    if (frac > 0.75) return { path: target, pos: 'after' };
+    return null;
+  }
+  return { path: target, pos: frac < 0.5 ? 'before' : 'after' };
+}
+
+async function applyReorder(from: string, target: { path: string; pos: 'before' | 'after' }) {
+  const parent = parentDir(from);
+  const parentNode = parent === root.value?.path ? root.value : findNode(parent);
+  if (!parentNode?.children) return;
+  const next = reorderedNames(parentNode.children, baseName(from), baseName(target.path), target.pos);
+  if (!next) return;
+  manualOrder.value = { ...manualOrder.value, [orderKey(parent)]: next };
+  parentNode.children = sortChildren(parent, parentNode.children);
+  await saveManualOrder();
+}
+
 /** Which folder the pointer is currently over, or null. Files are not drop
  *  targets: filing into a file's parent reads as "dropped into the file" and
  *  there is no honest way to highlight that. */
@@ -1049,7 +1197,9 @@ function onDragMove(e: PointerEvent) {
     document.body.style.cursor = 'grabbing';
     document.body.style.userSelect = 'none';
   }
-  const dest = destinationAt(e.clientX, e.clientY);
+  const reorder = reorderAt(e.clientX, e.clientY, dragPath.value ?? '', dragIsDir.value);
+  reorderTarget.value = reorder;
+  const dest = reorder ? null : destinationAt(e.clientX, e.clientY);
   const legal = dest && canDropInto(dragPath.value ?? '', dest) ? dest : null;
   dropTarget.value = legal;
   armAutoExpand(legal);
@@ -1077,13 +1227,15 @@ function onDragCancel() {
 function onDragUp() {
   const from = dragPath.value;
   const dest = dropTarget.value;
+  const reorder = reorderTarget.value;
   const isDir = dragIsDir.value;
   const wasDrag = dragActive;
   teardownDrag();
   if (!wasDrag) return;
   // The click that follows this pointerup belongs to the drag, not to the row.
   suppressClick.value = true;
-  if (from && dest) void moveNode(from, dest, isDir);
+  if (from && reorder) void applyReorder(from, reorder);
+  else if (from && dest) void moveNode(from, dest, isDir);
 }
 
 async function commitEdit() {
@@ -1131,6 +1283,15 @@ async function commitEdit() {
       await pendingDeletes.flushUnder(target);
       await invoke('fs_rename', { from: e.original, to: target });
       editing.value = null;
+      // #342 — a renamed child keeps its hand-placed position.
+      const key = orderKey(e.parent);
+      if (manualOrder.value[key]?.includes(baseName(e.original))) {
+        manualOrder.value = {
+          ...manualOrder.value,
+          [key]: renameInOrder(manualOrder.value[key], baseName(e.original), name),
+        };
+        void saveManualOrder();
+      }
       scheduleRefresh();
       // v4.3.5 — if the renamed file is open in a tab, the tab follows it.
       // repointTab is shared with the move path: it keeps a dirty tab's
@@ -1276,6 +1437,7 @@ function closeFolder() {
 // Close the context menu on any outside click / escape.
 function onWindowClick() {
   filterOpen.value = false;
+  sortOpen.value = false;
   if (switcherOpen.value) closeSwitcher();
   if (!ctx.value) return;
   closeCtx();
@@ -1285,6 +1447,7 @@ function onWindowKey(e: KeyboardEvent) {
     closeCtx();
     closeSwitcher();
     filterOpen.value = false;
+    sortOpen.value = false;
     if (editing.value) editing.value = null;
   }
 }
@@ -1353,6 +1516,32 @@ onBeforeUnmount(() => {
             </button>
             <div v-if="extList.length === 0" class="ftree__filter-empty">
               {{ t('explorer.filterNoTypes') || 'Nothing to filter yet.' }}
+            </div>
+          </div>
+        </div>
+        <div class="ftree__filter-wrap">
+          <button
+            class="ftree__hbtn"
+            :class="{ 'ftree__hbtn--on': sortMode !== 'name-asc' }"
+            :title="(t('explorer.sortBy') || 'Sort') + ' · ' + sortLabel(sortMode)"
+            @click.stop="toggleSortMenu"
+            :disabled="!root"
+          >⇅</button>
+          <div v-if="sortOpen" class="ftree__filter-pop" @click.stop>
+            <div class="ftree__filter-label">{{ t('explorer.sortBy') || 'Sort' }}</div>
+            <button
+              v-for="m in TREE_SORT_MODES"
+              :key="m"
+              class="ftree__filter-item"
+              :class="{ 'ftree__filter-item--active': sortMode === m }"
+              :disabled="m === 'manual' && !localVault"
+              @click="setSortMode(m)"
+            >
+              <span class="ftree__filter-check">{{ sortMode === m ? '✓' : '' }}</span>
+              <span class="ftree__filter-name">{{ sortLabel(m) }}</span>
+            </button>
+            <div v-if="sortMode === 'manual'" class="ftree__filter-empty">
+              {{ t('explorer.sortManualHint') }}
             </div>
           </div>
         </div>
@@ -1783,6 +1972,7 @@ export const FileTreeNode = defineComponent({
               dragPath.value === n.path ? 'ftree__item--dragging' : '',
               n.is_dir && dropTarget.value === n.path ? 'ftree__item--drop' : '',
               revealedPath.value === n.path ? 'ftree__item--revealed' : '',
+              reorderTarget.value && reorderTarget.value.path === n.path ? `ftree__item--insert-${reorderTarget.value.pos}` : '',
             ],
             style: { paddingLeft: indent + 'px' },
             // Hit-testing during a drag reads these off whatever row is under
@@ -1860,6 +2050,26 @@ export const FileTreeNode = defineComponent({
   user-select: none;
   position: relative;
 }
+/* #342 — manual-sort insertion line, drawn on the row a drop would land
+   before or after. :deep() because the rows are rendered by FileTreeNode,
+   which scoped styles don't reach otherwise (same as the rules below). */
+:deep(.ftree__item--insert-before),
+:deep(.ftree__item--insert-after) {
+  position: relative;
+}
+:deep(.ftree__item--insert-before)::after,
+:deep(.ftree__item--insert-after)::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accent);
+  pointer-events: none;
+}
+:deep(.ftree__item--insert-before)::after { top: -1px; }
+:deep(.ftree__item--insert-after)::after { bottom: -1px; }
 .ftree__header {
   display: flex;
   align-items: center;

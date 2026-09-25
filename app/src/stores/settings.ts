@@ -1,3 +1,4 @@
+import { isTreeSortMode, type TreeSortMode } from '../lib/tree-sort';
 import { defineStore } from 'pinia';
 import type { Theme, ViewMode } from '../types';
 import { isIOS, isMobile } from '../lib/platform';
@@ -329,6 +330,9 @@ interface Settings {
   // persists, so the tree carries a permanent banner whenever it is set —
   // a filter you can't see is indistinguishable from missing files.
   explorerExtFilter: string[];
+  // #342: file-tree order, per workspace folder (key = absolute folder path).
+  // A folder without an entry sorts by name, as it always did.
+  explorerSortByFolder: Record<string, TreeSortMode>;
   // #141 (4.8.10): render a single newline as a real line break (Typora-like)
   // in preview / live editor / every export. Default ON — CJK users write
   // one-sentence-per-line and expect it to hold; standard blank-line
@@ -666,6 +670,7 @@ function defaults(): Settings {
     explorerFollowActive: true,
     explorerShowHidden: false,
     explorerExtFilter: [] as string[],
+    explorerSortByFolder: {} as Record<string, TreeSortMode>,
     distinctSplitPanes: false,
     markdownHardBreaks: true,
     spellcheckLang: 'en_US',
@@ -750,6 +755,12 @@ function load(): Settings {
       // #180 — keybindings is a free-form map, so a tampered or older blob
       // could put anything here; keep only string/null values.
       if (merged.windowsEditorEngine !== 'codemirror') merged.windowsEditorEngine = 'native';
+      merged.explorerSortByFolder = {};
+      if (parsed.explorerSortByFolder && typeof parsed.explorerSortByFolder === 'object') {
+        for (const [k, v] of Object.entries(parsed.explorerSortByFolder)) {
+          if (isTreeSortMode(v)) merged.explorerSortByFolder[k] = v;
+        }
+      }
       merged.keybindings = {};
       if (parsed.keybindings && typeof parsed.keybindings === 'object') {
         for (const [k, v] of Object.entries(parsed.keybindings)) {
@@ -1407,6 +1418,13 @@ export const useSettingsStore = defineStore('settings', {
     },
     clearExplorerExtFilter() {
       this.explorerExtFilter = [];
+      this.persist();
+    },
+    setExplorerSort(folder: string, mode: TreeSortMode) {
+      const next = { ...this.explorerSortByFolder };
+      if (mode === 'name-asc') delete next[folder];
+      else next[folder] = mode;
+      this.explorerSortByFolder = next;
       this.persist();
     },
     toggleDistinctSplitPanes() {
