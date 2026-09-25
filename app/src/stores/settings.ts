@@ -98,7 +98,7 @@ interface Settings {
    *  forces CodeMirror regardless. Ignored on other platforms. */
   windowsEditorEngine: 'native' | 'codemirror';
   uiFontSize: number;
-  language: 'en' | 'zh' | 'ja' | 'ko' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'nl' | 'tr' | 'sv' | 'uk';
+  language: 'en' | 'zh' | 'ja' | 'ko' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'nl' | 'tr' | 'sv' | 'uk' | 'ru';
   autoCheckUpdate: boolean;
   // Preview layout
   previewFitWidth: boolean;
@@ -567,7 +567,7 @@ function defaults(): Settings {
     autoCheckUpdate: true,
     language: (() => {
       // Detect browser language on first run. Maps navigator BCP-47 tag
-      // to one of the 14 shipped UI locales; everything else → 'en'.
+      // to one of the 15 shipped UI locales; everything else → 'en'.
       try {
         const nav = typeof navigator !== 'undefined' ? navigator.language || '' : '';
         if (/^zh/i.test(nav)) return 'zh';
@@ -583,9 +583,10 @@ function defaults(): Settings {
         if (/^tr/i.test(nav)) return 'tr';
         if (/^sv/i.test(nav)) return 'sv';
         if (/^uk/i.test(nav)) return 'uk';
+        if (/^ru/i.test(nav)) return 'ru';
         return 'en';
       } catch { return 'en'; }
-    })() as 'en' | 'zh' | 'ja' | 'ko' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'nl' | 'tr' | 'sv' | 'uk',
+    })() as 'en' | 'zh' | 'ja' | 'ko' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'nl' | 'tr' | 'sv' | 'uk' | 'ru',
     previewFitWidth: false,
     previewMaxWidth: 760,
     plantumlEnabled: false,
@@ -1269,7 +1270,7 @@ export const useSettingsStore = defineStore('settings', {
       this.uiFontSize = Math.max(10, Math.min(20, n));
       this.persist();
     },
-    setLanguage(lang: 'en' | 'zh' | 'ja' | 'ko' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'nl' | 'tr' | 'sv' | 'uk') {
+    setLanguage(lang: 'en' | 'zh' | 'ja' | 'ko' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'nl' | 'tr' | 'sv' | 'uk' | 'ru') {
       this.language = lang;
       this.persist();
     },
