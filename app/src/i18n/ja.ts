@@ -1809,6 +1809,7 @@ export const ja: I18n = {
       split: '表示: 分割',
       preview: '表示: プレビューのみ',
       cycleView: '表示: モードを切り替え',
+      toggleLiveEdit: "表示:ライブ編集 / 編集のみを切り替え",
       toggleOutline: '表示: アウトラインを切り替え',
       toggleReading: '表示: 読書モードの切り替え',
       toggleFileTree: '表示: ファイルツリーを切り替え',

@@ -1809,6 +1809,7 @@ export const ko: I18n = {
       split: '보기: 분할',
       preview: '보기: 미리보기만',
       cycleView: '보기: 모드 전환',
+      toggleLiveEdit: "보기: 실시간 편집 / 편집만 전환",
       toggleOutline: '보기: 개요 토글',
       toggleReading: '보기: 읽기 모드 전환',
       toggleFileTree: '보기: 파일 트리 토글',

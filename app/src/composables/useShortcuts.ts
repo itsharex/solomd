@@ -110,6 +110,7 @@ export function useShortcuts(hooks: Hooks = {}) {
     'export.pdfPrint': () => runById('export.pdfPrint'),
 
     'view.cycleView': () => settings.cycleViewMode(),
+    'view.toggleLiveEdit': () => settings.toggleLiveEditSource(),
     // Pressing the same combo while already in reading mode restores the
     // previous mode.
     'view.toggleReading': () => settings.toggleReadingMode(),

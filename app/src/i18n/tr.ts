@@ -1826,6 +1826,7 @@ export const tr: I18n = {
       split: 'Görünüm: Bölünmüş',
       preview: 'Görünüm: Yalnızca Önizleme',
       cycleView: 'Görünüm: Modu Değiştir',
+      toggleLiveEdit: "Görünüm: canlı düzenleme / yalnızca düzenleme arasında geçiş",
       toggleOutline: 'Görünüm: Ana Hattı Aç/Kapat',
       toggleReading: 'Görünüm: Okuma modunu aç/kapat',
       toggleFileTree: 'Görünüm: Dosya Ağacını Aç/Kapat',

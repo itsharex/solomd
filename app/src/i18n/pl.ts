@@ -1826,6 +1826,7 @@ export const pl: I18n = {
       split: 'Widok: Podzielony',
       preview: 'Widok: Tylko podgląd',
       cycleView: 'Widok: Przełącz tryb',
+      toggleLiveEdit: "Widok: przełącz edycję na żywo / tylko edycję",
       toggleOutline: 'Widok: Przełącz konspekt',
       toggleReading: 'Widok: przełącz tryb czytania',
       toggleFileTree: 'Widok: Przełącz drzewo plików',

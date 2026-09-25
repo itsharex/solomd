@@ -1826,6 +1826,7 @@ export const sv: I18n = {
       split: 'Vy: Delad',
       preview: 'Vy: Endast förhandsvisning',
       cycleView: 'Vy: Växla läge',
+      toggleLiveEdit: "Visa: växla liveredigering / endast redigering",
       toggleOutline: 'Vy: Växla disposition',
       toggleReading: 'Vy: växla läsläge',
       toggleFileTree: 'Vy: Växla filträd',

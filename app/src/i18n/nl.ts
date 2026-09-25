@@ -1826,6 +1826,7 @@ export const nl: I18n = {
       split: 'Weergave: Gesplitst',
       preview: 'Weergave: Alleen voorbeeld',
       cycleView: 'Weergave: Modus wisselen',
+      toggleLiveEdit: "Weergave: live bewerken / alleen bewerken wisselen",
       toggleOutline: 'Weergave: Structuur in-/uitschakelen',
       toggleReading: 'Weergave: leesmodus in-/uitschakelen',
       toggleFileTree: 'Weergave: Bestandsboom in-/uitschakelen',

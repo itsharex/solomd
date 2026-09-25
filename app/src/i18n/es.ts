@@ -1809,6 +1809,7 @@ export const es: I18n = {
       split: 'Vista: Dividida',
       preview: 'Vista: Solo vista previa',
       cycleView: 'Vista: Cambiar modo',
+      toggleLiveEdit: "Ver: alternar edición en vivo / solo edición",
       toggleOutline: 'Vista: Alternar esquema',
       toggleReading: 'Vista: alternar modo lectura',
       toggleFileTree: 'Vista: Alternar árbol de archivos',

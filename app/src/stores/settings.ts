@@ -849,6 +849,11 @@ export const useSettingsStore = defineStore('settings', {
       const i = order.indexOf(this.viewMode);
       this.setViewMode(order[(i + 1) % order.length]);
     },
+    /** #180 - flip between live edit (WYSIWYG) and edit only (source).
+     *  From any other view (split, preview, reading) it lands in live edit. */
+    toggleLiveEditSource() {
+      this.setViewMode(this.viewMode === 'liveEdit' ? 'edit' : 'liveEdit');
+    },
     /**
      * Toggle reading mode on/off. If the user is currently in reading mode
      * we restore whatever they were in before; otherwise we save the

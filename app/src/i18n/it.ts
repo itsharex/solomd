@@ -1809,6 +1809,7 @@ export const it: I18n = {
       split: 'Vista: Divisa',
       preview: 'Vista: Solo anteprima',
       cycleView: 'Vista: Cambia modalità',
+      toggleLiveEdit: "Vista: alterna modifica live / solo modifica",
       toggleOutline: 'Vista: Attiva/disattiva struttura',
       toggleReading: 'Vista: attiva/disattiva modalità lettura',
       toggleFileTree: 'Vista: Attiva/disattiva albero dei file',

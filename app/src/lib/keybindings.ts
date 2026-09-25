@@ -128,6 +128,10 @@ export const KEY_ACTIONS: KeyActionDef[] = [
 
   // ---- View ----
   { id: 'view.cycleView', label: 'Cycle Edit / Split / Preview', category: 'view', defaults: ['Mod+Shift+P'] },
+  // #180: Typora users flip source <-> WYSIWYG with Ctrl+/. That chord is
+  // Markdown Help here, so the default is Mod+Alt+/; rebind it to Mod+/ in
+  // Settings -> Shortcuts to get Typora's muscle memory back.
+  { id: 'view.toggleLiveEdit', label: 'Toggle Live Edit / Edit Only', category: 'view', defaults: ['Mod+Alt+Slash'] },
   { id: 'view.toggleReading', label: 'Toggle Reading Mode', category: 'view', defaults: ['Mod+Shift+R'] },
   { id: 'view.toggleFileTree', label: 'Toggle File Tree', category: 'view', defaults: ['Mod+B'] },
   { id: 'view.toggleRightSidebar', label: 'Toggle Right Sidebar', category: 'view', defaults: ['Mod+Alt+B'] },

@@ -1813,6 +1813,7 @@ export const zh: I18n = {
       split: '视图:分栏',
       preview: '视图:仅预览',
       cycleView: '视图:循环切换模式',
+      toggleLiveEdit: "视图:切换实时编辑 / 仅编辑",
       toggleOutline: '视图:显示/隐藏大纲',
       toggleReading: '视图:切换阅读模式',
       toggleFileTree: '视图:显示/隐藏文件树',

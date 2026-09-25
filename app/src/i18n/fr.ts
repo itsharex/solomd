@@ -1809,6 +1809,7 @@ export const fr: I18n = {
       split: 'Affichage : Scindé',
       preview: 'Affichage : Aperçu seul',
       cycleView: 'Affichage : Changer de mode',
+      toggleLiveEdit: "Affichage : basculer édition en direct / édition seule",
       toggleOutline: 'Affichage : Afficher/masquer le plan',
       toggleReading: 'Affichage : basculer le mode lecture',
       toggleFileTree: 'Affichage : Afficher/masquer l\'arborescence de fichiers',

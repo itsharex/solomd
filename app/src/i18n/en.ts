@@ -1833,6 +1833,7 @@ export const en = {
       split: 'View: Split',
       preview: 'View: Preview Only',
       cycleView: 'View: Cycle Mode',
+      toggleLiveEdit: "View: Toggle Live Edit / Edit Only",
       toggleOutline: 'View: Toggle Outline',
       toggleReading: 'View: Toggle Reading Mode',
       toggleFileTree: 'View: Toggle File Tree',

@@ -201,6 +201,7 @@ export function useCommands(): Command[] {
     { id: 'view.split', title: 'View: Split', run: () => settings.setViewMode('split') },
     { id: 'view.preview', title: 'View: Preview Only', run: () => settings.setViewMode('preview') },
     { id: 'view.cycleView', title: 'View: Cycle Mode', shortcut: kb('view.cycleView'), run: () => settings.cycleViewMode() },
+    { id: 'view.toggleLiveEdit', title: 'View: Toggle Live Edit / Edit Only', shortcut: kb('view.toggleLiveEdit'), run: () => settings.toggleLiveEditSource() },
     { id: 'view.toggleOutline', title: 'View: Toggle Outline', shortcut: kb('view.toggleOutline'), run: () => { const tabs = useTabsStore(); if (tabs.activeId) tabs.toggleOutline(tabs.activeId); } },
     { id: 'view.toggleFileTree', title: 'View: Toggle File Tree', shortcut: kb('view.toggleFileTree'), run: () => settings.toggleFileTree() },
     { id: 'view.toggleRightSidebar', title: 'View: Toggle Right Sidebar', hint: 'Hide / show the Outline / Backlinks / Tags / History / Agent strip without losing per-pane preferences', shortcut: kb('view.toggleRightSidebar'), run: () => settings.toggleRightSidebar() },

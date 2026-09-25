@@ -1811,6 +1811,7 @@ export const pt: I18n = {
       split: 'Exibir: Dividido',
       preview: 'Exibir: Somente visualização',
       cycleView: 'Exibir: Alternar modo',
+      toggleLiveEdit: "Exibir: alternar edição ao vivo / só edição",
       toggleOutline: 'Exibir: Alternar estrutura',
       toggleReading: 'Exibir: alternar modo de leitura',
       toggleFileTree: 'Exibir: Alternar árvore de arquivos',

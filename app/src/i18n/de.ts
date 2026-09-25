@@ -1809,6 +1809,7 @@ export const de: I18n = {
       split: 'Ansicht: Geteilt',
       preview: 'Ansicht: Nur Vorschau',
       cycleView: 'Ansicht: Modus wechseln',
+      toggleLiveEdit: "Ansicht: Live-Bearbeitung / Nur Bearbeiten umschalten",
       toggleOutline: 'Ansicht: Gliederung umschalten',
       toggleReading: 'Ansicht: Lesemodus umschalten',
       toggleFileTree: 'Ansicht: Dateibaum umschalten',
