@@ -243,6 +243,12 @@ One maintainer, two front doors. Async on [GitHub Discussions](https://github.co
 &nbsp;&nbsp;
 <a href="https://t.me/SOLOMDAPP"><img src="web/public/contact/telegram.jpg" alt="Telegram @SOLOMDAPP" width="180" /></a>
 
+<!-- sponsors:start -->
+## Sponsors
+
+No sponsors listed yet. Be the first: [solomd.app/#sponsor](https://solomd.app/#sponsor).
+<!-- sponsors:end -->
+
 ## License & credits
 
 [MIT](LICENSE) © 2026 xiangdong li. SoloMD stands on Tauri 2, Vue 3, CodeMirror 6, markdown-it, KaTeX, Mermaid, libgit2, Pandoc, Hunspell, `keyring-rs`, and `rmcp`. Sponsor on [GitHub Sponsors](https://github.com/sponsors/zhitongblog) or via [solomd.app/#sponsor](https://solomd.app/#sponsor).

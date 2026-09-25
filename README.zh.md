@@ -207,6 +207,12 @@ MCP server 是独立 crate,在 `mcp-server/` 目录;端到端测试用的 dev MC
 &nbsp;&nbsp;
 <a href="https://t.me/SOLOMDAPP"><img src="web/public/contact/telegram.jpg" alt="Telegram @SOLOMDAPP" width="180" /></a>
 
+<!-- sponsors:start -->
+## 赞助者
+
+还没有赞助者。欢迎成为第一位：[solomd.app/#sponsor](https://solomd.app/#sponsor)。
+<!-- sponsors:end -->
+
 ## License & 致谢
 
 [MIT](LICENSE) © 2026 xiangdong li。SoloMD 站在 Tauri 2、Vue 3、CodeMirror 6、markdown-it、KaTeX、Mermaid、libgit2、Pandoc、Hunspell、`keyring-rs` 和 `rmcp` 的肩膀上。赞助:[GitHub Sponsors](https://github.com/sponsors/zhitongblog) 或 [solomd.app/#sponsor](https://solomd.app/#sponsor)。

@@ -221,6 +221,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Support SoloMD',
+      thanksHeading: "Thank you to our sponsors",
       lead: 'SoloMD is built and maintained by one developer in their free time. If it helps your writing, consider sponsoring — even a tiny amount keeps the project alive.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'For international sponsors. Monthly or one-time, processed by Stripe.',
@@ -579,6 +580,7 @@ export const t = {
     },
     sponsor: {
       heading: '赞助 SoloMD',
+      thanksHeading: "感谢这些赞助者",
       lead: 'SoloMD 由一位开发者在业余时间开发维护。如果它帮到了你的写作,欢迎赞助一杯咖啡的钱,让项目继续走下去。',
       ghTitle: 'GitHub Sponsors',
       ghDesc: '面向国际开发者,通过 Stripe 处理,可月付或一次性。',
@@ -885,6 +887,7 @@ export const t = {
     },
     sponsor: {
       heading: 'SoloMD をサポート',
+      thanksHeading: "スポンサーの皆さまに感謝します",
       lead: 'SoloMD は 1 人の開発者が余暇に開発・メンテナンスしています。執筆の助けになったら、わずかな額でもプロジェクトを生き延びさせる支援になります。',
       ghTitle: 'GitHub Sponsors',
       ghDesc: '国際的なスポンサー向け。Stripe で月次または一回限り処理。',
@@ -1135,6 +1138,7 @@ export const t = {
     },
     sponsor: {
       heading: 'SoloMD 후원',
+      thanksHeading: "후원해 주신 분들께 감사드립니다",
       lead: 'SoloMD는 한 명의 개발자가 여가 시간에 만들고 유지합니다. 작성에 도움이 된다면 후원을 고려해주세요 —— 작은 금액도 프로젝트를 살아있게 합니다.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: '국제 후원자용. 월간 또는 일회성, Stripe로 처리.',
@@ -1385,6 +1389,7 @@ export const t = {
     },
     sponsor: {
       heading: 'SoloMD unterstützen',
+      thanksHeading: "Danke an unsere Unterstützer",
       lead: 'SoloMD wird von einem Entwickler in seiner Freizeit gebaut und gepflegt. Wenn es Ihrem Schreiben hilft, erwägen Sie ein Sponsoring — selbst ein winziger Betrag hält das Projekt am Leben.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Für internationale Sponsoren. Monatlich oder einmalig, abgewickelt von Stripe.',
@@ -1635,6 +1640,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Soutenir SoloMD',
+      thanksHeading: "Merci à nos sponsors",
       lead: 'SoloMD est construit et maintenu par un développeur sur son temps libre. S\'il aide votre écriture, envisagez de sponsoriser — même un petit montant garde le projet en vie.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Pour les sponsors internationaux. Mensuel ou unique, traité par Stripe.',
@@ -1885,6 +1891,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Apoyar SoloMD',
+      thanksHeading: "Gracias a nuestros patrocinadores",
       lead: 'SoloMD está construido y mantenido por un desarrollador en su tiempo libre. Si ayuda a tu escritura, considera patrocinar — incluso una cantidad pequeña mantiene el proyecto vivo.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Para patrocinadores internacionales. Mensual o único, procesado por Stripe.',
@@ -2135,6 +2142,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Apoiar SoloMD',
+      thanksHeading: "Obrigado aos nossos apoiadores",
       lead: 'O SoloMD é construído e mantido por um desenvolvedor no tempo livre. Se ajuda sua escrita, considere patrocinar — até uma quantia pequena mantém o projeto vivo.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Para patrocinadores internacionais. Mensal ou único, processado pelo Stripe.',
@@ -2385,6 +2393,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Supportare SoloMD',
+      thanksHeading: "Grazie ai nostri sostenitori",
       lead: 'SoloMD è costruito e mantenuto da uno sviluppatore nel suo tempo libero. Se aiuta la tua scrittura, considera di sponsorizzare — anche un piccolo importo mantiene il progetto in vita.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Per sponsor internazionali. Mensile o una tantum, processato da Stripe.',
@@ -2635,6 +2644,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Wsparcie dla SoloMD',
+      thanksHeading: "Dziękujemy naszym sponsorom",
       lead: 'SoloMD jest budowany i utrzymywany przez jednego dewelopera w wolnym czasie. Jeśli pomaga ci pisać, rozważ wsparcie — nawet niewielka kwota utrzymuje projekt przy życiu.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Dla międzynarodowych sponsorów. Miesięcznie lub jednorazowo, obsługa przez Stripe.',
@@ -2885,6 +2895,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Steun SoloMD',
+      thanksHeading: "Dank aan onze sponsors",
       lead: 'SoloMD wordt gebouwd en onderhouden door één ontwikkelaar in zijn vrije tijd. Als het je schrijven helpt, overweeg dan om te sponsoren — zelfs een klein bedrag houdt het project levend.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Voor internationale sponsors. Maandelijks of eenmalig, verwerkt door Stripe.',
@@ -3135,6 +3146,7 @@ export const t = {
     },
     sponsor: {
       heading: 'SoloMD\'yi destekle',
+      thanksHeading: "Destekçilerimize teşekkürler",
       lead: 'SoloMD, bir geliştirici tarafından boş zamanlarında kuruluyor ve sürdürülüyor. Yazımına yardımcı olursa sponsor olmayı düşün — küçük bir tutar bile projeyi hayatta tutar.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Uluslararası sponsorlar için. Aylık veya tek seferlik, Stripe tarafından işlenir.',
@@ -3385,6 +3397,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Stöd SoloMD',
+      thanksHeading: "Tack till våra sponsorer",
       lead: 'SoloMD byggs och underhålls av en utvecklare på sin fritid. Om det hjälper ditt skrivande, överväg att sponsra — även ett litet belopp håller projektet vid liv.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'För internationella sponsorer. Månadsvis eller engångs, hanterat av Stripe.',
@@ -3635,6 +3648,7 @@ export const t = {
     },
     sponsor: {
       heading: 'Підтримати SoloMD',
+      thanksHeading: "Дякуємо нашим спонсорам",
       lead: 'SoloMD створений і підтримується одним розробником у вільний час. Якщо це допомагає вашому письму, розгляньте можливість спонсорства — навіть невелика сума підтримує життя проєкту.',
       ghTitle: 'GitHub Sponsors',
       ghDesc: 'Для міжнародних спонсорів. Щомісячно або одноразово, обробляється Stripe.',
