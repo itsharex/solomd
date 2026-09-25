@@ -2416,7 +2416,12 @@ export const FileTreeNode = defineComponent({
   color: var(--text-faint);
   font-style: italic;
 }
-.ftree__edit {
+/* :deep because the in-folder edit row is rendered by FileTreeNode, a
+   separate component: a plain scoped rule only reached the root-level row, so
+   inside a folder the row was not a flex container, the empty caret span
+   collapsed to nothing and the whole row sat ~16px left of its siblings
+   (#321). */
+:deep(.ftree__edit) {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -2424,8 +2429,11 @@ export const FileTreeNode = defineComponent({
   /* The inline row draws the same indent guides as the rows around it. */
   position: relative;
 }
-:deep(.ftree__edit) {
-  position: relative;
+/* Same glyph size as a file row, so the input starts where the name will. */
+:deep(.ftree__edit .ftree__icon) {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1;
 }
 .ftree__confirm-msg {
   margin: 0;
@@ -2440,7 +2448,7 @@ export const FileTreeNode = defineComponent({
   color: var(--text-muted);
   line-height: 1.5;
 }
-.ftree__edit-input {
+:deep(.ftree__edit-input) {
   flex: 1;
   font-size: 13px;
   font-family: inherit;
