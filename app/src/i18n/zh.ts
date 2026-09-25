@@ -552,6 +552,8 @@ export const zh: I18n = {
     keyboardShortcuts: '快捷键',
   },
   toast: {
+    imageInsertFailed: "图片插入失败：{error}",
+    imageSavedOutsideVault: "这个文件夹暂时无法存放图片，图片已保存到 SoloMD 自己的文档文件夹，并从那里引用。",
     newWindowFailed: '无法打开新窗口',
     noActiveDoc: '没有打开的文档',
     copied: '已复制',

@@ -551,6 +551,8 @@ export const nl: I18n = {
     keyboardShortcuts: 'Sneltoetsen',
   },
   toast: {
+    imageInsertFailed: "Kon de afbeelding niet invoegen: {error}",
+    imageSavedOutsideVault: "Deze map kan nog geen afbeeldingen bewaren, dus de afbeelding is opgeslagen in de map Documenten van SoloMD en vandaar gekoppeld.",
     newWindowFailed: 'Kon geen nieuw venster openen',
     noActiveDoc: 'Geen actief document',
     copied: 'Gekopieerd',

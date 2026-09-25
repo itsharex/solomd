@@ -551,6 +551,8 @@ export const ja: I18n = {
     keyboardShortcuts: 'キーボードショートカット',
   },
   toast: {
+    imageInsertFailed: "画像を挿入できませんでした：{error}",
+    imageSavedOutsideVault: "このフォルダにはまだ画像を保存できないため、SoloMD の書類フォルダに保存してそこからリンクしました。",
     newWindowFailed: '新しいウィンドウを開けませんでした',
     noActiveDoc: 'アクティブなドキュメントがありません',
     copied: 'コピーしました',

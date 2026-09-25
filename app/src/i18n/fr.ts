@@ -551,6 +551,8 @@ export const fr: I18n = {
     keyboardShortcuts: 'Raccourcis clavier',
   },
   toast: {
+    imageInsertFailed: "Impossible d’insérer l’image : {error}",
+    imageSavedOutsideVault: "Ce dossier ne peut pas encore contenir d’images : l’image a été enregistrée dans le dossier Documents de SoloMD et liée depuis celui-ci.",
     newWindowFailed: 'Impossible d\'ouvrir une nouvelle fenêtre',
     noActiveDoc: 'Aucun document actif',
     copied: 'Copié',

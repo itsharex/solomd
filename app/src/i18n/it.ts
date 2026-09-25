@@ -551,6 +551,8 @@ export const it: I18n = {
     keyboardShortcuts: 'Scorciatoie tastiera',
   },
   toast: {
+    imageInsertFailed: "Impossibile inserire l’immagine: {error}",
+    imageSavedOutsideVault: "Questa cartella non può ancora contenere immagini: l’immagine è stata salvata nella cartella Documenti di SoloMD e collegata da lì.",
     newWindowFailed: 'Impossibile aprire una nuova finestra',
     noActiveDoc: 'Nessun documento attivo',
     copied: 'Copiato',

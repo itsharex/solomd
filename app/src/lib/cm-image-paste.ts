@@ -15,9 +15,10 @@
 
 import { EditorView } from '@codemirror/view';
 import { invoke } from '@tauri-apps/api/core';
-import { tempDir, sep } from '@tauri-apps/api/path';
+import { tempDir, sep, documentDir } from '@tauri-apps/api/path';
 import { uploadImage, type ResolvedUploader } from './image-upload';
 import { markdownImage } from './md-image-url';
+import { isContentUri, isSafPath, sniffImageExt } from './image-source';
 
 export interface ImagePasteOptions {
   getFilePath: () => string | undefined;
@@ -180,6 +181,18 @@ async function resolveTempDir(override?: string): Promise<string> {
   }
 }
 
+/** #349 — bytes of an Android `content://` URI, through the fs plugin's
+ *  ContentResolver bridge (the same one #148 uses to open notes). */
+async function readContentUri(uri: string): Promise<Uint8Array> {
+  const { readFile } = await import('@tauri-apps/plugin-fs');
+  return readFile(uri);
+}
+
+function reportFailure(opts: ImagePasteOptions, err: unknown): void {
+  console.error('[cm-image-paste] image insert failed', err);
+  opts.notify?.('error', 'toast.imageInsertFailed', { error: String(err) });
+}
+
 async function readFileAsUint8(file: File | Blob): Promise<Uint8Array> {
   const buf = await file.arrayBuffer();
   return new Uint8Array(buf);
@@ -210,6 +223,23 @@ async function prepareLocalTarget(
   const sepCh = getSep();
   const filePath = opts.getFilePath();
   const imageRoot = opts.getDocContent ? parseImageRootFast(opts.getDocContent()) : null;
+
+  // #349 — a note in a SAF vault has a `saf:<documentId>` path. Joining
+  // `_assets/` onto it gives a string that no filesystem call can write, so
+  // the image was silently lost. SAF can't store binary files yet: keep the
+  // image in SoloMD's own Documents folder and link it by absolute path
+  // (the asset protocol scope covers it, so it renders), and say so.
+  if (isSafPath(filePath)) {
+    let base: string;
+    try {
+      base = await documentDir();
+    } catch {
+      base = await resolveTempDir(opts.tempDir);
+    }
+    const fullPath = joinPath(joinPath(base, '_assets', sepCh), filename, sepCh);
+    opts.notify?.('info', 'toast.imageSavedOutsideVault');
+    return { fullPath, insertText: markdownImage(fullPath.replace(/\\/g, '/')) };
+  }
 
   if (imageRoot && filePath) {
     const rootAbs = imageRoot.startsWith('/') || /^[a-zA-Z]:[\\/]/.test(imageRoot);
@@ -327,6 +357,7 @@ async function saveAndInsert(
 
   if (!up || !up.onPaste) {
     if (await writeBytes(local.fullPath, bytes)) insertAtCursor(view, local.insertText);
+    else reportFailure(opts, `could not write ${local.fullPath}`);
     return;
   }
 
@@ -409,11 +440,16 @@ async function saveOrUploadText(
   const up = opts.getUploader ? opts.getUploader(filename) : null;
   const local = await prepareLocalTarget(filename, opts);
   if (!up || !up.onPaste) {
-    return (await writeBytes(local.fullPath, bytes)) ? local.insertText : null;
+    if (await writeBytes(local.fullPath, bytes)) return local.insertText;
+    reportFailure(opts, `could not write ${local.fullPath}`);
+    return null;
   }
   let srcPath: string;
   if (up.keepLocal) {
-    if (!(await writeBytes(local.fullPath, bytes))) return null;
+    if (!(await writeBytes(local.fullPath, bytes))) {
+      reportFailure(opts, `could not write ${local.fullPath}`);
+      return null;
+    }
     srcPath = local.fullPath;
   } else {
     const temp = await prepareTempTarget(filename, opts);
@@ -500,6 +536,19 @@ export async function insertImageFromPath(
   srcPath: string,
   opts: ImagePasteOptions,
 ): Promise<void> {
+  // #349 — Android pickers return content:// URIs: read the bytes and take
+  // the paste path, which writes bytes instead of copying a file.
+  if (isContentUri(srcPath)) {
+    let bytes: Uint8Array;
+    try {
+      bytes = await readContentUri(srcPath);
+    } catch (err) {
+      reportFailure(opts, err);
+      return;
+    }
+    await saveAndInsert(view, bytes, sniffImageExt(bytes) || extFromName(srcPath) || 'png', opts);
+    return;
+  }
   const ext = extFromName(srcPath) || 'png';
   const filename = makeFilename(ext);
   const up = opts.getUploader ? opts.getUploader(filename) : null;
@@ -509,8 +558,9 @@ export async function insertImageFromPath(
     try {
       await invoke('copy_file', { src: srcPath, dst: local.fullPath });
     } catch (err) {
-      console.error('[cm-image-paste] copy_file failed', err);
-      throw err;
+      // Was a rethrow that nobody caught: the insert just didn't happen.
+      reportFailure(opts, err);
+      return;
     }
     insertAtCursor(view, local.insertText);
     return;
@@ -549,6 +599,16 @@ export async function imageTextFromPath(
   srcPath: string,
   opts: ImagePasteOptions,
 ): Promise<string | null> {
+  if (isContentUri(srcPath)) {
+    let bytes: Uint8Array;
+    try {
+      bytes = await readContentUri(srcPath);
+    } catch (err) {
+      reportFailure(opts, err);
+      return null;
+    }
+    return saveOrUploadText(bytes, sniffImageExt(bytes) || extFromName(srcPath) || 'png', opts);
+  }
   const ext = extFromName(srcPath) || 'png';
   const filename = makeFilename(ext);
   const up = opts.getUploader ? opts.getUploader(filename) : null;
@@ -558,7 +618,7 @@ export async function imageTextFromPath(
       await invoke('copy_file', { src: srcPath, dst: local.fullPath });
       return true;
     } catch (err) {
-      console.error('[cm-image-paste] copy_file failed', err);
+      reportFailure(opts, err);
       return false;
     }
   };

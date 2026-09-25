@@ -551,6 +551,8 @@ export const es: I18n = {
     keyboardShortcuts: 'Atajos de teclado',
   },
   toast: {
+    imageInsertFailed: "No se pudo insertar la imagen: {error}",
+    imageSavedOutsideVault: "Esta carpeta aún no puede guardar imágenes, así que la imagen se guardó en la carpeta Documentos de SoloMD y se enlazó desde allí.",
     newWindowFailed: 'No se pudo abrir una ventana nueva',
     noActiveDoc: 'Sin documento activo',
     copied: 'Copiado',

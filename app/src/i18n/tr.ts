@@ -551,6 +551,8 @@ export const tr: I18n = {
     keyboardShortcuts: 'Klavye Kısayolları',
   },
   toast: {
+    imageInsertFailed: "Görsel eklenemedi: {error}",
+    imageSavedOutsideVault: "Bu klasör henüz görsel saklayamıyor; görsel SoloMD'nin Belgeler klasörüne kaydedildi ve oradan bağlandı.",
     newWindowFailed: 'Yeni pencere açılamadı',
     noActiveDoc: 'Etkin belge yok',
     copied: 'Kopyalandı',

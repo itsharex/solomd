@@ -553,6 +553,8 @@ export const pt: I18n = {
     keyboardShortcuts: 'Atalhos de teclado',
   },
   toast: {
+    imageInsertFailed: "Não foi possível inserir a imagem: {error}",
+    imageSavedOutsideVault: "Esta pasta ainda não pode guardar imagens; a imagem foi salva na pasta Documentos do SoloMD e vinculada a partir dela.",
     newWindowFailed: 'Não foi possível abrir uma nova janela',
     noActiveDoc: 'Nenhum documento ativo',
     copied: 'Copiado',

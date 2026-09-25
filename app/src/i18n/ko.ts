@@ -551,6 +551,8 @@ export const ko: I18n = {
     keyboardShortcuts: '키보드 단축키',
   },
   toast: {
+    imageInsertFailed: "이미지를 삽입하지 못했습니다: {error}",
+    imageSavedOutsideVault: "이 폴더에는 아직 이미지를 저장할 수 없어 SoloMD 문서 폴더에 저장하고 그곳을 링크했습니다.",
     newWindowFailed: '새 창을 열 수 없습니다',
     noActiveDoc: '활성 문서가 없습니다',
     copied: '복사됨',

@@ -552,6 +552,8 @@ export const en = {
     keyboardShortcuts: 'Keyboard Shortcuts',
   },
   toast: {
+    imageInsertFailed: "Couldn't insert the image: {error}",
+    imageSavedOutsideVault: "This folder can't hold images yet, so the image was saved in SoloMD's own Documents folder and linked from there.",
     newWindowFailed: 'Could not open a new window',
     noActiveDoc: 'No active document',
     copied: 'Copied',

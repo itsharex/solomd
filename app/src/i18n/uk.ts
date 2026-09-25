@@ -551,6 +551,8 @@ export const uk: I18n = {
     keyboardShortcuts: 'Гарячі клавіші',
   },
   toast: {
+    imageInsertFailed: "Не вдалося вставити зображення: {error}",
+    imageSavedOutsideVault: "Ця тека поки не може зберігати зображення, тож його збережено в теці «Документи» SoloMD і вставлено посилання звідти.",
     newWindowFailed: 'Не вдалося відкрити нове вікно',
     noActiveDoc: 'Немає активного документа',
     copied: 'Скопійовано',

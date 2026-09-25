@@ -551,6 +551,8 @@ export const sv: I18n = {
     keyboardShortcuts: 'Tangentbordsgenvägar',
   },
   toast: {
+    imageInsertFailed: "Kunde inte infoga bilden: {error}",
+    imageSavedOutsideVault: "Den här mappen kan inte lagra bilder ännu, så bilden sparades i SoloMD:s Dokument-mapp och länkades därifrån.",
     newWindowFailed: 'Det gick inte att öppna ett nytt fönster',
     noActiveDoc: 'Inget aktivt dokument',
     copied: 'Kopierat',
