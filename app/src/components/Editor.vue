@@ -191,6 +191,8 @@ const langCompartment = new Compartment();
 const wrapCompartment = new Compartment();
 const lineNumCompartment = new Compartment();
 const cursorCompartment = new Compartment();
+// #344 — optional caret-line tint (the base theme paints .cm-activeLine clear).
+const activeLineCompartment = new Compartment();
 const fontSizeCompartment = new Compartment();
 // #180 — the AI-rewrite chord is user-bindable; keep it reconfigurable.
 const aiKeyCompartment = new Compartment();
@@ -2774,6 +2776,8 @@ function richExtensionsFor(tab: Tab) {
           enabled: settings.plantumlEnabled,
           server: settings.plantumlServer,
         }),
+        // #353 — "Always show Markdown markers": keep every block's source.
+        keepSource: () => settings.alwaysShowMarkers,
         getBoardStrings: () => ({
           loading: t('whiteboard.loading'),
           openFull: t('whiteboard.openFull'),
@@ -2787,9 +2791,22 @@ function richExtensionsFor(tab: Tab) {
         },
       }),
       liveBlocksTheme,
-    ]);
+    ], { showMarkers: settings.alwaysShowMarkers });
   }
-  return settings.livePreview ? livePreviewExtension() : richHighlightOnly();
+  return settings.livePreview
+    ? livePreviewExtension({ showMarkers: settings.alwaysShowMarkers })
+    : richHighlightOnly();
+}
+
+// #344 — caret-line tint. Selector is one step more specific than the base
+// theme's transparent `.cm-activeLine` so it wins regardless of order.
+function activeLineExtension(on: boolean) {
+  if (!on) return [];
+  return EditorView.theme({
+    '.cm-content .cm-line.cm-activeLine': {
+      backgroundColor: 'color-mix(in srgb, var(--accent) 9%, transparent)',
+    },
+  });
 }
 
 const fontSizeTheme = (px: number, family: string) =>
@@ -2835,6 +2852,7 @@ function buildExtensions() {
           cursorCompartment.of(
             drawSelection({ cursorBlinkRate: settings.solidCursor ? 0 : 1200 }),
           ),
+          activeLineCompartment.of(activeLineExtension(settings.highlightCurrentLine)),
           // #90 — column/rectangular selection: hold Alt (Option on macOS) and
           // drag to select a vertical block. `crosshairCursor` swaps the I-beam
           // for a crosshair while Alt is held so the user knows the mode is
@@ -3606,6 +3624,21 @@ watch(
   (w) => {
     view?.dispatch({ effects: wrapCompartment.reconfigure(w ? EditorView.lineWrapping : []) });
   }
+);
+
+watch(
+  () => settings.highlightCurrentLine,
+  (on) => {
+    view?.dispatch({ effects: activeLineCompartment.reconfigure(activeLineExtension(on)) });
+  },
+);
+
+// #353 — markers shown/hidden is baked into the live bundles; swap them.
+watch(
+  () => settings.alwaysShowMarkers,
+  () => {
+    view?.dispatch({ effects: richCompartment.reconfigure(richExtensionsFor(props.tab)) });
+  },
 );
 
 watch(

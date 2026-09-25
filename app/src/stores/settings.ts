@@ -34,6 +34,12 @@ interface Settings {
   showLineNumbers: boolean;
   // #193 — non-blinking (solid) caret in the editor.
   solidCursor: boolean;
+  // #353 — keep Markdown markers (`#`, `**`, …) visible in the CodeMirror
+  // live views instead of hiding them off the caret line, so clicking a line
+  // doesn't reflow it. Styling (heading size, bold) still applies.
+  alwaysShowMarkers: boolean;
+  // #344 — tint the caret line's background in the CodeMirror editor.
+  highlightCurrentLine: boolean;
   // #190 — dedicated code font (code blocks / inline code / mono UI).
   // Empty = built-in monospace stack.
   codeFontFamily: string;
@@ -530,6 +536,8 @@ function defaults(): Settings {
     wordWrap: true,
     showLineNumbers: true,
     solidCursor: false,
+    alwaysShowMarkers: false,
+    highlightCurrentLine: false,
     codeFontFamily: '',
     showOutline: false,
     outlineSide: 'right',
@@ -903,6 +911,14 @@ export const useSettingsStore = defineStore('settings', {
     },
     toggleSolidCursor() {
       this.solidCursor = !this.solidCursor;
+      this.persist();
+    },
+    toggleAlwaysShowMarkers() {
+      this.alwaysShowMarkers = !this.alwaysShowMarkers;
+      this.persist();
+    },
+    toggleHighlightCurrentLine() {
+      this.highlightCurrentLine = !this.highlightCurrentLine;
       this.persist();
     },
     setCodeFontFamily(f: string) {

@@ -870,6 +870,22 @@ function onSelectPdfFont(v: string) {
 
         <section data-cat="basics">
           <label>
+            <input type="checkbox" :checked="settings.alwaysShowMarkers" @change="settings.toggleAlwaysShowMarkers()" />
+            {{ t('settings.alwaysShowMarkers') }}
+          </label>
+          <div class="hint">{{ t('settings.alwaysShowMarkersHint') }}</div>
+        </section>
+
+        <section data-cat="basics">
+          <label>
+            <input type="checkbox" :checked="settings.highlightCurrentLine" @change="settings.toggleHighlightCurrentLine()" />
+            {{ t('settings.highlightCurrentLine') }}
+          </label>
+          <div class="hint">{{ t('settings.highlightCurrentLineHint') }}</div>
+        </section>
+
+        <section data-cat="basics">
+          <label>
             <input type="checkbox" :checked="settings.showOutline" @change="onToggleOutlineGlobal()" />
             {{ t('settings.showOutline') }}
           </label>

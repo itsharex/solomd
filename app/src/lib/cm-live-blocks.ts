@@ -652,6 +652,14 @@ interface BlockOptions {
   getBoardStrings?: () => { loading: string; openFull: string; loadFailed: string };
   /** v4.10 #163 — PlantUML opt-in + server; absent/disabled → fences stay source. */
   getPlantuml?: () => { enabled: boolean; server: string };
+  /**
+   * #353 "Always show Markdown markers": the source stays visible whatever the
+   * caret does, so nothing collapses and nothing jumps when a line is clicked.
+   * Images still render, as a block below their own (visible) source line;
+   * tables, math, HTML blocks and diagrams keep their source. tldraw boards
+   * are unaffected — they never reveal source anyway.
+   */
+  keepSource?: () => boolean;
 }
 
 function buildBlockDecorations(state: EditorState, opts: BlockOptions): DecorationSet {
@@ -659,6 +667,7 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
         const sel = state.selection.main;
         const cursorLine = state.doc.lineAt(sel.from).number;
         const cursorLineEnd = state.doc.lineAt(sel.to).number;
+        const keepSource = opts.keepSource?.() === true;
 
         // Single pass over the whole doc — for each line, decide:
         //   * is it a standalone image line we should replace? (1 line)
@@ -685,6 +694,7 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
           if (htmlEndIndex !== null) {
             const endI = htmlEndIndex + 1;
             const cursorInside =
+              keepSource ||
               (cursorLine >= i && cursorLine <= endI) ||
               (cursorLineEnd >= i && cursorLineEnd <= endI);
             if (!cursorInside) {
@@ -711,6 +721,25 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
           // Image line.
           const imgMatch = IMAGE_LINE_RE.exec(line.text);
           if (imgMatch) {
+            if (keepSource) {
+              // Render below the source line and leave the line alone, so
+              // clicking into it changes nothing on screen.
+              const root = opts.getImageRoot?.() ?? null;
+              const filePath = opts.getFilePath?.();
+              const src = resolveImageSrc(imgMatch[2], root, filePath);
+              const localPath = resolveImagePath(imgMatch[2], root, filePath);
+              builder.add(
+                line.to,
+                line.to,
+                Decoration.widget({
+                  widget: new ImageWidget(src, imgMatch[1], isLocalSvgPath(localPath) ? localPath : null),
+                  block: true,
+                  side: 1,
+                }),
+              );
+              i += 1;
+              continue;
+            }
             const cursorInside = i >= cursorLine && i <= cursorLineEnd;
             if (!cursorInside) {
               const alt = imgMatch[1];
@@ -740,7 +769,7 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
           if (trimmedLine.startsWith('$$')) {
             // Single-line `$$ ... $$`?
             if (trimmedLine.endsWith('$$') && trimmedLine.length > 4) {
-              const cursorInside = cursorLine === i || cursorLineEnd === i;
+              const cursorInside = keepSource || cursorLine === i || cursorLineEnd === i;
               if (!cursorInside) {
                 builder.add(
                   line.from,
@@ -762,7 +791,7 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
               endI += 1;
             }
             if (endI <= lastLine) {
-              const cursorInside = cursorLine >= i && cursorLine <= endI;
+              const cursorInside = keepSource || (cursorLine >= i && cursorLine <= endI);
               const cursorInsideEnd = cursorLineEnd >= i && cursorLineEnd <= endI;
               if (!cursorInside && !cursorInsideEnd) {
                 const blockFrom = doc.line(i).from;
@@ -840,7 +869,7 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
               endI += 1;
             }
             if (endI <= lastLine) {
-              const cursorInside = cursorLine >= i && cursorLine <= endI;
+              const cursorInside = keepSource || (cursorLine >= i && cursorLine <= endI);
               const cursorInsideEnd = cursorLineEnd >= i && cursorLineEnd <= endI;
               if (!cursorInside && !cursorInsideEnd) {
                 // Body is between the opening and closing fence.
@@ -880,7 +909,7 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
               endI += 1;
             }
             if (endI <= lastLine) {
-              const cursorInside = cursorLine >= i && cursorLine <= endI;
+              const cursorInside = keepSource || (cursorLine >= i && cursorLine <= endI);
               const cursorInsideEnd = cursorLineEnd >= i && cursorLineEnd <= endI;
               if (!cursorInside && !cursorInsideEnd) {
                 let body = '';
@@ -917,9 +946,10 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
               const tableEnd = endI - 1; // last pipe row
               if (tableEnd >= i + 2) {
                 const cursorInside =
-                  cursorLine >= i && cursorLine <= tableEnd
+                  keepSource ||
+                  (cursorLine >= i && cursorLine <= tableEnd
                     ? true
-                    : cursorLineEnd >= i && cursorLineEnd <= tableEnd;
+                    : cursorLineEnd >= i && cursorLineEnd <= tableEnd);
                 if (!cursorInside) {
                   const blockFrom = doc.line(i).from;
                   const blockTo = doc.line(tableEnd).to;
@@ -946,7 +976,7 @@ function buildBlockDecorations(state: EditorState, opts: BlockOptions): Decorati
           // pay for the inline-math regex + code-span mask. Plain prose lines
           // — the overwhelming majority in a large doc — short-circuit here, so
           // this whole-doc pass doesn't get measurably slower (#5 perf).
-          const inlineCursorHere = i >= cursorLine && i <= cursorLineEnd;
+          const inlineCursorHere = keepSource || (i >= cursorLine && i <= cursorLineEnd);
           if (!inlineCursorHere && line.text.indexOf('$') !== -1) {
             for (const span of inlineMathSpans(line.text)) {
               builder.add(
