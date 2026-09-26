@@ -133,6 +133,16 @@ export function themeFamily(theme: Theme): 'light' | 'dark' {
 }
 
 /**
+ * Mermaid's built-in theme for a SoloMD theme: 'dark' for every dark theme
+ * (Nord, Dracula, Monokai, Solarized Dark…), not only the one named "dark".
+ * Live edit, the Windows editor and preview all use this, so a diagram looks
+ * the same in each (#354).
+ */
+export function mermaidThemeFor(theme: Theme): 'dark' | 'default' {
+  return themeFamily(theme) === 'dark' ? 'dark' : 'default';
+}
+
+/**
  * With a custom CSS theme active, only the light/dark family of the built-in
  * choice survives (#346). Marketplace themes key their palette on `:root`,
  * `:root[data-theme="light"]` and `:root[data-theme="dark"]`. Every other

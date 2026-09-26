@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { initMermaid } from '../lib/mermaid-lazy';
+import { mermaidThemeFor } from '../lib/themes';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { renderMarkdown, extractImageRoot } from '../lib/markdown';
 import { plantumlSvgUrl } from '../lib/plantuml';
@@ -191,7 +192,7 @@ async function processMermaid() {
   const mermaid = await initMermaid({
     startOnLoad: false,
     securityLevel: 'strict',
-    theme: settings.theme === 'dark' ? 'dark' : 'default',
+    theme: mermaidThemeFor(settings.theme),
   });
   for (const block of Array.from(blocks)) {
     const pre = block.parentElement as HTMLElement | null;
@@ -202,6 +203,8 @@ async function processMermaid() {
       const { svg } = await mermaid.render(id, code);
       const wrap = document.createElement('div');
       wrap.className = 'mermaid-block';
+      // Keep the source so a theme switch can re-render this diagram.
+      wrap.dataset.mermaidSource = code;
       wrap.innerHTML = svg;
       pre.replaceWith(wrap);
     } catch (e) {
@@ -284,10 +287,23 @@ async function processWhiteboards() {
   }
 }
 
-// The theme is applied by processMermaid on each render pass, so there is
-// nothing to re-initialise here — and initialising eagerly would load the
-// renderer for a note that has no diagrams.
-watch(() => settings.theme, () => { void processMermaid(); });
+// The theme is applied by processMermaid on each render pass. Diagrams already
+// on screen were drawn for the old theme and processMermaid skips them, so put
+// their source back as a fence first and let it render them again (#354).
+// A note with no diagrams still never loads the renderer.
+watch(() => settings.theme, () => {
+  if (host.value) {
+    for (const wrap of Array.from(host.value.querySelectorAll<HTMLElement>('.mermaid-block[data-mermaid-source]'))) {
+      const pre = document.createElement('pre');
+      const code = document.createElement('code');
+      code.className = 'language-mermaid';
+      code.textContent = wrap.dataset.mermaidSource ?? '';
+      pre.appendChild(code);
+      wrap.replaceWith(pre);
+    }
+  }
+  void processMermaid();
+});
 
 function overlayStrings(): OverlayStrings {
   return {

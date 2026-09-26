@@ -15,7 +15,7 @@ import { codeLanguages } from '../lib/code-languages';
 import { fenceLanguageComplete, fenceLanguageExtension } from '../lib/cm-fence-completion';
 import { filterFenceLanguages, isInsideFenceBefore, matchFenceOpener } from '../lib/fence-languages';
 import { vim, Vim } from '@replit/codemirror-vim';
-import { cmThemeFor } from '../lib/themes';
+import { cmThemeFor, mermaidThemeFor } from '../lib/themes';
 import { registerPlainSelectionGetter } from '../lib/plain-selection';
 import {
   headingFoldExtension,
@@ -608,7 +608,7 @@ async function processPlainLiveRenderedBlocks() {
     ? await initMermaid({
         startOnLoad: false,
         securityLevel: 'strict',
-        theme: settings.theme === 'dark' ? 'dark' : 'default',
+        theme: mermaidThemeFor(settings.theme),
       })
     : null;
   for (const block of Array.from(mermaidBlocks)) {
@@ -2900,6 +2900,8 @@ function richExtensionsFor(tab: Tab) {
           locale: settings.language || 'en',
         }),
         getTabId: () => tab.id,
+        // #354 — diagrams follow the app's light/dark family, like preview.
+        getMermaidTheme: () => mermaidThemeFor(settings.theme),
         getPlantuml: () => ({
           enabled: settings.plantumlEnabled,
           server: settings.plantumlServer,
@@ -3737,6 +3739,9 @@ watch(
   () => [settings.theme, !!settings.customCssPath] as const,
   ([t, custom]) => {
     view?.dispatch({ effects: themeCompartment.reconfigure(cmThemeFor(t, custom)) });
+    // Live-edit Mermaid widgets carry their theme; rebuild the block field so
+    // diagrams on screen re-render for the new light/dark family (#354).
+    window.dispatchEvent(new CustomEvent('solomd:cm-relayout'));
   }
 );
 
